@@ -8,16 +8,29 @@ public class Upgrades : MonoBehaviour
     protected string description;
     protected Sprite image;
     protected float cost;
-    protected GameObject panel;
+    public GameObject panel;
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
-        panel = Resources.Load("Panel") as GameObject;
+        GameObject loadedPanel = Resources.Load("Panel") as GameObject;
+
+        //spawn the panel
+        panel = Instantiate(loadedPanel);
+        panel.SetActive(false);
     }
 
+   protected GameObject GetPanelRef()
+    {
+        return panel;
+    }
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+   protected virtual void OnButtonClicked()
+    {
+
     }
 }
