@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ExampleUpgrade : Upgrades
 {
     Button[] buttons;
+    GameManager gameManager;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -20,9 +21,9 @@ public class ExampleUpgrade : Upgrades
             "Social: +2" + "\n" +
             "Ecomical: +3" + "\n" +
             "Enviromental: -2";
-        cost = 100000;
+        cost = 100;
 
-
+        gameManager = GameObject.FindObjectOfType<GameManager>();
     }
 
     void CreatePanel()
@@ -76,20 +77,36 @@ public class ExampleUpgrade : Upgrades
         // get game controller with total money
 
         //compare cost
-        //if(cost < totalgamemoney)
-        //{
-        //    buttons[0].interactable = true;
-        //}
-        //else
-        //{
-        //    buttons[0].interactable = false;
-        //}
+        if (cost < gameManager.money)
+        {
+            buttons[0].interactable = true;
+            gameManager.checkRayCast = false;
+            gameManager.checkUIRayCast = true;
+            gameManager.activeUpgrade = this;
+        }
+        else
+        {
+            buttons[0].interactable = false;
+            gameManager.checkRayCast = false;
+            gameManager.checkUIRayCast = false;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void PlaceUpgrade()
+    {
+        gameManager.checkUIRayCast = false;
+        gameManager.checkRayCast = true;
+
+        gameManager.spriteToPlace = tileSprite;
+        gameManager.CloseUpgradeUI();
+        Destroy(panel);
+
     }
 
      public void ButtonClicked()

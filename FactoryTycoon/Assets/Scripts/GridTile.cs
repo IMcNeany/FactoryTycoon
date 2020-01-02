@@ -8,7 +8,7 @@ public class GridTile : MonoBehaviour
     Vector2 position;
     Vector2 GridNode;
     public string factorySection;
-    bool occupied = false;
+    public bool occupied = false;
 
     // Start is called before the first frame update
     void Start()

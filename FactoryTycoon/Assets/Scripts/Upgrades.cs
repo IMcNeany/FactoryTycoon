@@ -9,10 +9,11 @@ public class Upgrades : MonoBehaviour
     protected Sprite image;
     protected float cost;
     public GameObject panel;
+    public GameObject tileSprite;
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        GameObject loadedPanel = Resources.Load("Panel") as GameObject;
+        GameObject loadedPanel = Resources.Load("Upgrade Panel") as GameObject;
 
         //spawn the panel
         panel = Instantiate(loadedPanel);
