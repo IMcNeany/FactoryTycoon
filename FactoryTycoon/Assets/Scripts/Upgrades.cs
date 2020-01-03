@@ -8,6 +8,9 @@ public class Upgrades : MonoBehaviour
     protected string description;
     protected Sprite image;
     protected float cost;
+    protected float economical;
+    protected float environmental;
+    protected float social;
     public GameObject panel;
     public GameObject tileSprite;
     // Start is called before the first frame update

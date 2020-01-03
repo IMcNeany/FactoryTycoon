@@ -52,7 +52,7 @@ public class UIRayCaster : MonoBehaviour
     {
         if(result.gameObject.name == "Purchase")
         {
-           ExampleUpgrade upgrade = gameManager.activeUpgrade;
+           Upgrade upgrade = gameManager.activeUpgrade;
             upgrade.PlaceUpgrade();
        
         }

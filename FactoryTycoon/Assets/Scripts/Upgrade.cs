@@ -4,24 +4,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ExampleUpgrade : Upgrades
+public class Upgrade : Upgrades
 {
     Button[] buttons;
     GameManager gameManager;
     // Start is called before the first frame update
     protected override void Start()
     {
-       
-      
         CreatePanel();
-
-
-        title = "Item Title";
-        description = "content description of upgrade/machine" + "\n" +
-            "Social: +2" + "\n" +
-            "Ecomical: +3" + "\n" +
-            "Enviromental: -2";
-        cost = 100;
 
         gameManager = GameObject.FindObjectOfType<GameManager>();
     }
@@ -54,7 +44,7 @@ public class ExampleUpgrade : Upgrades
             }
             else if(textBoxes[i].gameObject.name == "Description")
             {
-                textBoxes[i].SetText(description);
+                textBoxes[i].SetText(description + "\n" + "Social: " + social +"\n" + "Economical: " + economical + "\n" + "Environmental: " + environmental);
             }
 
         }
@@ -70,6 +60,17 @@ public class ExampleUpgrade : Upgrades
             }
         }
 
+    }
+
+    public void SetDesc(string upgradeName, string desc, float money, float itemSocial, float itemEco, float itemEnvironmental, GameObject tile)
+    {
+        title = upgradeName;
+        description = desc;
+        cost = money;
+        social = itemSocial;
+        economical = itemEco;
+        environmental = itemEnvironmental;
+        tileSprite = tile;
     }
 
     void CheckPurchaseCost()
@@ -103,7 +104,17 @@ public class ExampleUpgrade : Upgrades
         gameManager.checkUIRayCast = false;
         gameManager.checkRayCast = true;
 
-        gameManager.spriteToPlace = tileSprite;
+        //pass all infor to active upgrades
+        ActiveUpgrade activeUpgrade = GameObject.FindObjectOfType<ActiveUpgrade>();
+
+        activeUpgrade.title = title;
+        activeUpgrade.itemEconomical = economical;
+        activeUpgrade.itemEnvironmental = environmental;
+        activeUpgrade.itemSocial = social;
+        activeUpgrade.itemCost = cost;
+        activeUpgrade.spriteToPlace = tileSprite;
+
+
         gameManager.CloseUpgradeUI();
         Destroy(panel);
 

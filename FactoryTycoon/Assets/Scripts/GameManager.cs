@@ -1,34 +1,61 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
 
-    public int environment = 0;
-    public int economic = 0;
-    public int social = 0;
+
+    public float environment = 0;
+    public float economic = 0;
+    public float social = 0;
     public float money = 1000;
 
-    public GameObject spriteToPlace = null;
+
 
     public GameObject uiUpgrades;
     public bool checkRayCast = true;
     public bool checkUIRayCast = true;
 
-    public ExampleUpgrade activeUpgrade;
+    public Upgrade activeUpgrade;
+    public TextMeshProUGUI cash;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        cash.SetText(" £" + money);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
+
+    public void UpdateMoney(float cashSum)
+    {
+        money += cashSum;
+        cash.SetText(" £" + money);
+    }
+
+    public void UpdateSocial(float itemsocial)
+    {
+        social += itemsocial;
+
+    }
+    public void UpdateEconomic(float itemEconomical)
+    {
+        economic += itemEconomical;
+
+
+    }
+    public void UpdateEnvironmental(float itemsEnvironmental)
+    {
+        environment += itemsEnvironmental;
+
+    }
+
 
     public void CloseUpgradeUI()
     {

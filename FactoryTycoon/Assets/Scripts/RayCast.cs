@@ -6,6 +6,7 @@ using UnityEngine;
 public class RayCast : MonoBehaviour
 {
     public GameManager gameManager;
+    public ActiveUpgrade activeUpgrade;
 
 
     // Start is called before the first frame update
@@ -56,20 +57,26 @@ public class RayCast : MonoBehaviour
 
         if(hitObject.GetComponent<GridTile>())
         {
+            //Will check if upgrade has been selected and place it
             GridTile gridTile = hitObject.GetComponent<GridTile>();
             Debug.Log("grid obj");
-            if(gridTile.factorySection == "Factory" && gridTile.occupied != true)
+            if(gridTile.factorySection == "Factory" && gridTile.occupied != true && activeUpgrade.spriteToPlace != null)
             {
-                GameObject machine = Instantiate(gameManager.spriteToPlace, gridTile.transform);
-                machine.transform.position = new Vector3(gridTile.transform.position.x, gridTile.transform.position.y, -1);
-                machine.transform.localScale = new Vector3(4, 4, 1);
-                gridTile.occupied = true;
-                gameManager.spriteToPlace = null;
+                 GameObject machine = Instantiate(activeUpgrade.spriteToPlace, gridTile.transform);
+                 machine.transform.position = new Vector3(gridTile.transform.position.x, gridTile.transform.position.y, -1);
+                 machine.transform.localScale = new Vector3(4, 4, 1);
+                 gridTile.occupied = true;
+                activeUpgrade.spriteToPlace = null;
 
-                //need to take away the money
-                //and add stats
-                
-            }
+                gameManager.UpdateMoney(-activeUpgrade.itemCost);
+                gameManager.UpdateEconomic(activeUpgrade.itemEconomical);
+                gameManager.UpdateEnvironmental(activeUpgrade.itemEnvironmental);
+                gameManager.UpdateSocial(activeUpgrade.itemSocial);
+
+                 //need to take away the money
+                 //and add stats
+
+             }
         }
     }
 }
