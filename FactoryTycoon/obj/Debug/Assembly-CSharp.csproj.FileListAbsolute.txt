@@ -274,3 +274,6 @@ C:\Users\User\Documents\Masters\FactoryTycoon\FactoryTycoon\obj\Debug\Assembly-C
 C:\Users\User\Documents\Masters\FactoryTycoon\FactoryTycoon\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Users\User\Documents\Masters\FactoryTycoon\FactoryTycoon\obj\Debug\Assembly-CSharp.dll
 C:\Users\User\Documents\Masters\FactoryTycoon\FactoryTycoon\obj\Debug\Assembly-CSharp.pdb
+E:\Isobel\Documents\Masters\FactoryTycoon\FactoryTycoon\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+E:\Isobel\Documents\Masters\FactoryTycoon\FactoryTycoon\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
+E:\Isobel\Documents\Masters\FactoryTycoon\FactoryTycoon\obj\Debug\Assembly-CSharp.dll

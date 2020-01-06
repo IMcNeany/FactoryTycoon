@@ -40,7 +40,7 @@ public class UIRayCaster : MonoBehaviour
                 //For every result returned, output the name of the GameObject on the Canvas hit by the Ray
                 foreach (RaycastResult result in results)
                 {
-                  
+                    Debug.Log(result.gameObject.name);
                     CheckResult(result);
                     
                 }

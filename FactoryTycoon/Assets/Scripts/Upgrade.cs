@@ -62,7 +62,7 @@ public class Upgrade : Upgrades
 
     }
 
-    public void SetDesc(string upgradeName, string desc, float money, float itemSocial, float itemEco, float itemEnvironmental, GameObject tile)
+    public void SetDesc(string upgradeName, string desc, float money, float itemSocial, float itemEco, float itemEnvironmental, GameObject tile, string SecName)
     {
         title = upgradeName;
         description = desc;
@@ -71,6 +71,7 @@ public class Upgrade : Upgrades
         economical = itemEco;
         environmental = itemEnvironmental;
         tileSprite = tile;
+        itemUpgradeSection = SecName;
     }
 
     void CheckPurchaseCost()
@@ -78,16 +79,16 @@ public class Upgrade : Upgrades
         // get game controller with total money
 
         //compare cost
-        if (cost < gameManager.money)
+        if (cost <= gameManager.money)
         {
-            buttons[0].interactable = true;
+            buttons[1].interactable = true;
             gameManager.checkRayCast = false;
             gameManager.checkUIRayCast = true;
             gameManager.activeUpgrade = this;
         }
         else
         {
-            buttons[0].interactable = false;
+            buttons[1].interactable = false;
             gameManager.checkRayCast = false;
             gameManager.checkUIRayCast = false;
         }
@@ -108,6 +109,7 @@ public class Upgrade : Upgrades
         ActiveUpgrade activeUpgrade = GameObject.FindObjectOfType<ActiveUpgrade>();
 
         activeUpgrade.title = title;
+        activeUpgrade.itemSection = itemUpgradeSection;
         activeUpgrade.itemEconomical = economical;
         activeUpgrade.itemEnvironmental = environmental;
         activeUpgrade.itemSocial = social;

@@ -6,6 +6,7 @@ public class ActiveUpgrade : MonoBehaviour
 {
 
     public string title;
+    public string itemSection;
     public float itemSocial;
     public float itemEconomical;
     public float itemEnvironmental;

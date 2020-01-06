@@ -5,10 +5,10 @@ using UnityEngine;
 public class GenerateGrid : MonoBehaviour
 {
     int storageRows = 3;
-    int factoryHeight = 7;
-    int factoryWidth = 6;
+    int factoryHeight = 7; public int GetHeight() { return factoryHeight; }
+    int factoryWidth = 6; public int GetWidth() { return factoryWidth; }
     float squareSize = 1;
-    public  GameObject gridSquare;
+    GameObject gridSquare;
     GridTile[,] gridTiles;
 
     // Start is called before the first frame update
@@ -44,6 +44,11 @@ public class GenerateGrid : MonoBehaviour
             }
             
         }
+    }
+
+    public GridTile GetGrid(int i , int j)
+    {
+        return  gridTiles[i,j];
     }
 
     string TileType(int i, int j)

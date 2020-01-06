@@ -67,14 +67,17 @@ public class RayCast : MonoBehaviour
                  machine.transform.localScale = new Vector3(4, 4, 1);
                  gridTile.occupied = true;
                 activeUpgrade.spriteToPlace = null;
-
+                gridTile.tileUpgradeName = activeUpgrade.title;
+                gridTile.UpgradeSection = activeUpgrade.itemSection;
                 gameManager.UpdateMoney(-activeUpgrade.itemCost);
                 gameManager.UpdateEconomic(activeUpgrade.itemEconomical);
                 gameManager.UpdateEnvironmental(activeUpgrade.itemEnvironmental);
                 gameManager.UpdateSocial(activeUpgrade.itemSocial);
 
-                 //need to take away the money
-                 //and add stats
+                StartTurn turnButton = FindObjectOfType<StartTurn>();
+                turnButton.CheckTiles();
+
+                gameManager.checkRayCast = false;
 
              }
         }

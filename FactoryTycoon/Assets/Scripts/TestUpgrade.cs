@@ -18,12 +18,14 @@ public class TestUpgrade : Upgrade
     float itemEconomic;
     [SerializeField]
     GameObject sprite;
+    [SerializeField]
+    string SectionName;
     // Start is called before the first frame update
     protected override void Start()
     {
 
         Upgrade parentUpgrade = this.gameObject.GetComponent<Upgrade>();
-        parentUpgrade.SetDesc(itemTitle, itemDesc, itemCost, itemSocial, itemEnvironmental, itemEconomic, sprite);
+        parentUpgrade.SetDesc(itemTitle, itemDesc, itemCost, itemSocial, itemEnvironmental, itemEconomic, sprite, SectionName);
     }
 
 

@@ -8,6 +8,8 @@ public class GridTile : MonoBehaviour
     Vector2 position;
     Vector2 GridNode;
     public string factorySection;
+    public string tileUpgradeName;
+    public string UpgradeSection;
     public bool occupied = false;
 
     // Start is called before the first frame update

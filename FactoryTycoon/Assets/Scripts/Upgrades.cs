@@ -6,6 +6,7 @@ public class Upgrades : MonoBehaviour
 {
     protected string title;
     protected string description;
+    protected string itemUpgradeSection;
     protected Sprite image;
     protected float cost;
     protected float economical;
