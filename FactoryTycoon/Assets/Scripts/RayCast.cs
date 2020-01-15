@@ -60,26 +60,42 @@ public class RayCast : MonoBehaviour
             //Will check if upgrade has been selected and place it
             GridTile gridTile = hitObject.GetComponent<GridTile>();
             Debug.Log("grid obj");
-            if(gridTile.factorySection == "Factory" && gridTile.occupied != true && activeUpgrade.spriteToPlace != null)
+            if (activeUpgrade.itemSection == "RawMaterial")
             {
-                 GameObject machine = Instantiate(activeUpgrade.spriteToPlace, gridTile.transform);
-                 machine.transform.position = new Vector3(gridTile.transform.position.x, gridTile.transform.position.y, -1);
-                 machine.transform.localScale = new Vector3(4, 4, 1);
-                 gridTile.occupied = true;
-                activeUpgrade.spriteToPlace = null;
-                gridTile.tileUpgradeName = activeUpgrade.title;
-                gridTile.UpgradeSection = activeUpgrade.itemSection;
-                gameManager.UpdateMoney(-activeUpgrade.itemCost);
-                gameManager.UpdateEconomic(activeUpgrade.itemEconomical);
-                gameManager.UpdateEnvironmental(activeUpgrade.itemEnvironmental);
-                gameManager.UpdateSocial(activeUpgrade.itemSocial);
-
-                StartTurn turnButton = FindObjectOfType<StartTurn>();
-                turnButton.CheckTiles();
-
-                gameManager.checkRayCast = false;
-
-             }
+                if (gridTile.factorySection == "Storage" && gridTile.occupied != true && activeUpgrade.spriteToPlace != null)
+                {
+                    PlaceUpgrade(gridTile);
+                }
+            }
+            else
+            {
+                if (gridTile.factorySection == "Factory" && gridTile.occupied != true && activeUpgrade.spriteToPlace != null)
+                {
+                    PlaceUpgrade(gridTile);
+                }
+            }
         }
+    }
+
+    void PlaceUpgrade(GridTile gridTile)
+    {
+
+        GameObject machine = Instantiate(activeUpgrade.spriteToPlace, gridTile.transform);
+        machine.transform.position = new Vector3(gridTile.transform.position.x, gridTile.transform.position.y, -1);
+        machine.transform.localScale = new Vector3(4, 4, 1);
+        gridTile.occupied = true;
+        activeUpgrade.spriteToPlace = null;
+        gridTile.tileUpgradeName = activeUpgrade.title;
+        gridTile.UpgradeSection = activeUpgrade.itemSection;
+        gridTile.itemQuantity = activeUpgrade.ProductionQuantity;
+        gameManager.UpdateMoney(-activeUpgrade.itemCost);
+        gameManager.UpdateEconomic(activeUpgrade.itemEconomical);
+        gameManager.UpdateEnvironmental(activeUpgrade.itemEnvironmental);
+        gameManager.UpdateSocial(activeUpgrade.itemSocial);
+
+        StartTurn turnButton = FindObjectOfType<StartTurn>();
+        turnButton.CheckTiles();
+
+        gameManager.checkRayCast = false;
     }
 }

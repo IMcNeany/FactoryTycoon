@@ -10,6 +10,7 @@ public class GridTile : MonoBehaviour
     public string factorySection;
     public string tileUpgradeName;
     public string UpgradeSection;
+    public float itemQuantity; 
     public bool occupied = false;
 
     // Start is called before the first frame update
@@ -26,12 +27,21 @@ public class GridTile : MonoBehaviour
         TintGrid();
     }
 
+    public void ResetTile()
+    {
+        
+        tileUpgradeName =null;
+        UpgradeSection = null;
+        itemQuantity = 0;
+        occupied = false;
+    }
+
     void TintGrid()
     {
         if(factorySection == "Storage")
         {
             gameObject.GetComponent<SpriteRenderer>().color = new Color(0.7305146f, 0.6032253f, 0.430728f);
-            occupied = true;
+            occupied = false;
         }
     }
 

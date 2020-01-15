@@ -62,7 +62,7 @@ public class Upgrade : Upgrades
 
     }
 
-    public void SetDesc(string upgradeName, string desc, float money, float itemSocial, float itemEco, float itemEnvironmental, GameObject tile, string SecName)
+    public void SetDesc(string upgradeName, string desc, float money, float itemSocial, float itemEco, float itemEnvironmental, GameObject tile, string SecName, float quantity)
     {
         title = upgradeName;
         description = desc;
@@ -72,6 +72,7 @@ public class Upgrade : Upgrades
         environmental = itemEnvironmental;
         tileSprite = tile;
         itemUpgradeSection = SecName;
+        productionQuantity = quantity;
     }
 
     void CheckPurchaseCost()
@@ -115,6 +116,7 @@ public class Upgrade : Upgrades
         activeUpgrade.itemSocial = social;
         activeUpgrade.itemCost = cost;
         activeUpgrade.spriteToPlace = tileSprite;
+        activeUpgrade.ProductionQuantity = productionQuantity;
 
 
         gameManager.CloseUpgradeUI();

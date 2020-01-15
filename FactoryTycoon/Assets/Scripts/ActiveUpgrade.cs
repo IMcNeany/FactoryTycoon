@@ -11,6 +11,7 @@ public class ActiveUpgrade : MonoBehaviour
     public float itemEconomical;
     public float itemEnvironmental;
     public float itemCost;
+    public float ProductionQuantity;
     public GameObject spriteToPlace = null;
 
   

@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public float social = 0;
     public float money = 1000;
 
+    public float sellPrice = 100;
 
 
     public GameObject uiUpgrades;

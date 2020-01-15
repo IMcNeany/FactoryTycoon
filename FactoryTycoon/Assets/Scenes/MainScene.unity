@@ -408,6 +408,7 @@ MonoBehaviour:
   itemEconomic: 1
   sprite: {fileID: 91369809032495128, guid: e5ae9842de4b9bd488314d6303dbced5, type: 3}
   SectionName: Disposal
+  productionQuant: 0
 --- !u!114 &79928282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1429,6 +1430,7 @@ MonoBehaviour:
   itemEconomic: 1
   sprite: {fileID: 91369809032495128, guid: ebbc895d0ce596f468273b2660bbba2c, type: 3}
   SectionName: Production
+  productionQuant: 100
 --- !u!1 &475125926
 GameObject:
   m_ObjectHideFlags: 0
@@ -1531,10 +1533,10 @@ RectTransform:
   m_Father: {fileID: 1096188457}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 200, y: -50}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &488606014
 MonoBehaviour:
@@ -1666,6 +1668,7 @@ MonoBehaviour:
   itemEconomic: 0
   sprite: {fileID: 91369809032495128, guid: 33c5dc096aececb4a8c178ebb2e5ccdf, type: 3}
   SectionName: RawMaterial
+  productionQuant: 5
 --- !u!1 &520345499
 GameObject:
   m_ObjectHideFlags: 0
@@ -2070,6 +2073,7 @@ GameObject:
   - component: {fileID: 619827219}
   - component: {fileID: 619827218}
   - component: {fileID: 619827220}
+  - component: {fileID: 619827221}
   m_Layer: 0
   m_Name: GameManger
   m_TagString: Untagged
@@ -2093,6 +2097,7 @@ MonoBehaviour:
   economic: 0
   social: 0
   money: 1000
+  sellPrice: 100
   uiUpgrades: {fileID: 2085997566}
   checkRayCast: 0
   checkUIRayCast: 1
@@ -2130,7 +2135,20 @@ MonoBehaviour:
   itemEconomical: 0
   itemEnvironmental: 0
   itemCost: 0
+  ProductionQuantity: 0
   spriteToPlace: {fileID: 0}
+--- !u!114 &619827221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 619827217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b5cdc4ce91157e4da225449363a6658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &636057989
 GameObject:
   m_ObjectHideFlags: 0
@@ -2146,7 +2164,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &636057990
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2771,6 +2789,7 @@ MonoBehaviour:
   itemEconomic: 1
   sprite: {fileID: 91369809032495128, guid: ebbc895d0ce596f468273b2660bbba2c, type: 3}
   SectionName: Production
+  productionQuant: 250
 --- !u!114 &812126289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4792,6 +4811,7 @@ MonoBehaviour:
   itemEconomic: 1
   sprite: {fileID: 91369809032495128, guid: e5ae9842de4b9bd488314d6303dbced5, type: 3}
   SectionName: Disposal
+  productionQuant: 0
 --- !u!114 &1298966045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4999,10 +5019,10 @@ RectTransform:
   m_Father: {fileID: 1096188457}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 75, y: -50}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1340457564
 MonoBehaviour:
@@ -5135,6 +5155,7 @@ MonoBehaviour:
   itemEconomic: 1
   sprite: {fileID: 91369809032495128, guid: 33c5dc096aececb4a8c178ebb2e5ccdf, type: 3}
   SectionName: RawMaterial
+  productionQuant: 5
 --- !u!1 &1345072994
 GameObject:
   m_ObjectHideFlags: 0
@@ -5664,7 +5685,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4284109312
   m_fontColor: {r: 0, g: 0.32156864, b: 0.3529412, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -6966,7 +6987,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2104298599}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 619827221}
+        m_MethodName: UseMaterials
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2104298599
