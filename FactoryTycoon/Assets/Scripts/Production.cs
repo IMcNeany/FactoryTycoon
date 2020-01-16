@@ -36,6 +36,8 @@ public class Production : MonoBehaviour
 
     public void UseMaterials()
     {
+
+        UpdateStats();
         totalRawMat = 0;
         DisposalTiles.Clear();
         productionTiles.Clear();
@@ -102,5 +104,11 @@ public class Production : MonoBehaviour
         }
         GameManager gameManager = FindObjectOfType<GameManager>();
         gameManager.UpdateMoney(totalSales);
+    }
+
+    void UpdateStats()
+    {
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        gameManager.UpdateUI();
     }
 }
