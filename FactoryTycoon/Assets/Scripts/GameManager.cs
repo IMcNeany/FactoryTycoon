@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class GameManager : MonoBehaviour
@@ -23,6 +24,12 @@ public class GameManager : MonoBehaviour
 
     public Upgrade activeUpgrade;
     public TextMeshProUGUI cash;
+    public TextMeshProUGUI socialText;
+    public TextMeshProUGUI economicText;
+    public TextMeshProUGUI environmentText;
+    public Slider socialSlider;
+    public Slider economicSlider;
+    public Slider environmentSlider;
 
     // Start is called before the first frame update
     void Start()
@@ -65,7 +72,23 @@ public class GameManager : MonoBehaviour
         uiUpgrades.SetActive(false);
     }
 
-    public int GetTurn()
+ public void UpdateUI()
+    {
+
+        //deciding between the bars and having the text at the top one will be removed
+        socialText.SetText(social.ToString());
+        economicText.SetText(economic.ToString());
+        environmentText.SetText(environment.ToString());
+
+
+        socialSlider.SetValueWithoutNotify(social);
+        economicSlider.SetValueWithoutNotify(economic);
+        environmentSlider.SetValueWithoutNotify(environment);
+
+
+
+    }
+   public int GetTurn()
     {
         return turn;
     }
@@ -78,6 +101,4 @@ public class GameManager : MonoBehaviour
             question.SetActive(true);
         }
     }
-
-
 }
