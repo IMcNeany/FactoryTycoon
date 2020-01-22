@@ -1,0 +1,24 @@
+[
+  {
+    "Question": "this is the first question?",
+    "Answers": [
+      "Answer 1",
+      "Answer 2",
+      "Answer 3"
+    ],
+    "CorrectAnswer": "1",
+    "CorrectExplanation": "You got it right! Answer 1 was the correct answer!",
+    "IncorrectExplanation": "That's wrong, Answer 1 was the correct answer because of this.."
+  },
+{
+    "Question": "Which is the correct answer?",
+    "Answers": [
+      "1",
+      "2",
+      "3"
+    ],
+    "CorrectAnswer": "3",
+    "CorrectExplanation": "You got it right! Answer 3 was the correct answer!",
+    "IncorrectExplanation": "That's wrong, Answer 3 was the correct answer because of this.."
+  }
+]

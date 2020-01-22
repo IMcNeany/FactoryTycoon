@@ -11,8 +11,10 @@ public class GameManager : MonoBehaviour
     public float economic = 0;
     public float social = 0;
     public float money = 1000;
+    int turn = 0;
 
     public float sellPrice = 100;
+    public GameObject question;
 
 
     public GameObject uiUpgrades;
@@ -62,4 +64,20 @@ public class GameManager : MonoBehaviour
     {
         uiUpgrades.SetActive(false);
     }
+
+    public int GetTurn()
+    {
+        return turn;
+    }
+
+    public void IncreaseTurn()
+    {
+        turn++;
+        if(turn % 5 == 0)
+        {
+            question.SetActive(true);
+        }
+    }
+
+
 }

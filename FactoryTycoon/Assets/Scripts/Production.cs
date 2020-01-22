@@ -36,6 +36,7 @@ public class Production : MonoBehaviour
 
     public void UseMaterials()
     {
+       
         totalRawMat = 0;
         DisposalTiles.Clear();
         productionTiles.Clear();
@@ -73,6 +74,9 @@ public class Production : MonoBehaviour
 
         UseProductionMachines();
 
+        IncreaseTurnCount();
+
+
     }
 
     bool CountRawMats(GridTile tile)
@@ -102,5 +106,11 @@ public class Production : MonoBehaviour
         }
         GameManager gameManager = FindObjectOfType<GameManager>();
         gameManager.UpdateMoney(totalSales);
+    }
+
+    public void IncreaseTurnCount()
+    {
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        gameManager.IncreaseTurn();
     }
 }
