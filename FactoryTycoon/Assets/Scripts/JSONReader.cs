@@ -32,7 +32,7 @@ public class JSONReader : MonoBehaviour
     public GameObject continueButton;
 
     public Rootobject loadedData;
-    List<int> QuestionsAsked;
+    public List<int> QuestionsAsked;
 
     int newNumber;
 
