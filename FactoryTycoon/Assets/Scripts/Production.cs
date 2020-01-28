@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Production : MonoBehaviour
 {
+    public GameObject waste;
+    public GameObject rawMat;
     GenerateGrid grid;
     float totalRawMat = 0;
 
@@ -73,8 +75,8 @@ public class Production : MonoBehaviour
         }
 
         UseProductionMachines();
-
-        IncreaseTurnCount();
+        UseDisposal();
+            IncreaseTurnCount();
 
 
     }
@@ -106,6 +108,94 @@ public class Production : MonoBehaviour
         }
         GameManager gameManager = FindObjectOfType<GameManager>();
         gameManager.UpdateMoney(totalSales);
+    }
+
+    void UseDisposal()
+    {
+         int perMachine = Mathf.FloorToInt(totalRawMat / DisposalTiles.Count);
+         int remainder = (int)totalRawMat % (int)DisposalTiles.Count;
+
+        //add up percentages on disposal machines
+       
+        for (int i = 0; i < DisposalTiles.Count; i++)
+        {
+            //calculated the percentage chance of raw material
+            for (int j = 0; j < perMachine; j++)
+            {
+                float percentageChance = (DisposalTiles[i].itemQuantity / 100);
+
+                if(Random.value > percentageChance)
+                {
+                    //waste
+                    GridTile gridTile = FindEmpty();
+                    gridTile.occupied = true;
+                    gridTile.itemQuantity = 1;
+                    gridTile.UpgradeSection = "Waste";
+                    Instantiate(waste, gridTile.transform);
+                }
+                else
+                {
+                    //raw material
+                    GridTile gridTile = FindEmpty();
+                    gridTile.occupied = true;
+                    gridTile.itemQuantity = 1;
+                    //gridTile.tileUpgradeName = "RawMaterial";
+                    gridTile.UpgradeSection = "RawMaterial";
+                    // gridTile.transform.position;
+                    Instantiate(rawMat, gridTile.transform);
+
+                }
+
+
+            }
+
+        }
+        if (remainder == 1)
+        {
+            float percentageChance = (DisposalTiles[0].itemQuantity / 100);
+
+            if (Random.value > percentageChance)
+            {
+                //waste
+                GridTile gridTile = FindEmpty();
+                gridTile.occupied = true;
+                gridTile.itemQuantity = 1;
+                gridTile.UpgradeSection = "Waste";
+                Instantiate(waste, gridTile.transform);
+            }
+            else
+            {
+                //raw material
+                GridTile gridTile = FindEmpty();
+                gridTile.occupied = true;
+                gridTile.itemQuantity = 1;
+                //gridTile.tileUpgradeName = "RawMaterial";
+                gridTile.UpgradeSection = "RawMaterial";
+                // gridTile.transform.position;
+                Instantiate(rawMat, gridTile.transform);
+
+            }
+        }
+
+    }
+
+    GridTile FindEmpty()
+    {
+
+        for (int i = 0; i < grid.GetHeight(); i++)
+        {
+            for (int j = 0; j < grid.GetWidth(); j++)
+            {
+                GridTile tile = grid.GetGrid(i, j);
+                if (!tile.occupied && tile.factorySection == "Storage")
+                {
+                    return tile;
+                }
+            }
+        }
+
+        //no empty ones
+        return null;
     }
   void UpdateStats()
     {

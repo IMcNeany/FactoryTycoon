@@ -36,7 +36,7 @@ public class JSONReader : MonoBehaviour
 
     int newNumber;
 
-    public void Start()
+    public void Awake()
     {
         QuestionsAsked = new List<int>();
         LoadJSON();
