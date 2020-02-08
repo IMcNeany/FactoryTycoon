@@ -30,11 +30,15 @@ public class GameManager : MonoBehaviour
     public Slider socialSlider;
     public Slider economicSlider;
     public Slider environmentSlider;
+    public TextMeshProUGUI Goals;
+    public TextMeshProUGUI turnsLeft;
 
     // Start is called before the first frame update
     void Start()
     {
         cash.SetText(" £" + money);
+        SetObjectives();
+        CalculateTurn();
     }
 
     // Update is called once per frame
@@ -96,9 +100,28 @@ public class GameManager : MonoBehaviour
     public void IncreaseTurn()
     {
         turn++;
-        if(turn % 5 == 0)
+        CalculateTurn();
+        Goal goalSetter = FindObjectOfType<Goal>();
+        //check if player has reached objective
+        goalSetter.TurnGoal();
+
+        if (turn % 5 == 0)
         {
             question.SetActive(true);
         }
     }
+
+    void SetObjectives()
+    {
+       Goal goalSetter =  FindObjectOfType<Goal>();
+       Goals.SetText(goalSetter.goalText);
+    }
+
+    void CalculateTurn()
+    {
+        Goal goalSetter = FindObjectOfType<Goal>();
+        int tLeft = goalSetter.GetTotalTurns() - turn;
+        turnsLeft.SetText(tLeft.ToString());
+    }
+
 }
