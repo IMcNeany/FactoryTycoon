@@ -21,9 +21,14 @@ public class Goal : MonoBehaviour
         thrifty
     }
     // Start is called before the first frame update
-    void Awake()
+    void start()
     {
+       
         SetGoal(0);
+    }
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
@@ -42,7 +47,7 @@ public class Goal : MonoBehaviour
                    
                    if(gameManager.money >= Targetmoney)
                     {
-                        Debug.Log("win");
+                        gameManager.Win();
                     }
                 }
                 break;
@@ -69,9 +74,9 @@ public class Goal : MonoBehaviour
         }
     }
 
-    public void SetGoal(Difficulty difficulty)
+    public void SetGoal(int difficulty)
     {
-        currentDifficulty = difficulty;
+        currentDifficulty = (Goal.Difficulty) difficulty;
         /*
          * •“Easy” : Hard to lose public approval + longer game lengths + lower volumes of waste to handle 
 
@@ -95,25 +100,31 @@ public class Goal : MonoBehaviour
                 break;
             case 1:
                 {
-                    totalTurns = 15;
+                    goalText = "Not implemented yet";
+                   totalTurns = 15;
                 }
                 break;
             case 2:
                 {
+                    goalText = "Not implemented yet";
                     totalTurns = 10;
                 }
                 break;
             case 3:
                 {
+                    goalText = "Not implemented yet";
                     totalTurns = 10;
                 }
                 break;
             case 4:
                 {
+                    goalText = "Not implemented yet";
                     totalTurns = 10;
                 }
                 break;
         }
+
+        
     }
 
     public int GetTotalTurns()

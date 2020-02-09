@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -32,10 +33,14 @@ public class GameManager : MonoBehaviour
     public Slider environmentSlider;
     public TextMeshProUGUI Goals;
     public TextMeshProUGUI turnsLeft;
+    public GameObject gameOverScreen;
+    public GameObject winScreen;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameOverScreen.SetActive(false);
+        winScreen.SetActive(false);
         cash.SetText(" £" + money);
         SetObjectives();
         CalculateTurn();
@@ -100,11 +105,11 @@ public class GameManager : MonoBehaviour
     public void IncreaseTurn()
     {
         turn++;
-        CalculateTurn();
+        
         Goal goalSetter = FindObjectOfType<Goal>();
         //check if player has reached objective
         goalSetter.TurnGoal();
-
+        CalculateTurn();
         if (turn % 5 == 0)
         {
             question.SetActive(true);
@@ -122,6 +127,28 @@ public class GameManager : MonoBehaviour
         Goal goalSetter = FindObjectOfType<Goal>();
         int tLeft = goalSetter.GetTotalTurns() - turn;
         turnsLeft.SetText(tLeft.ToString());
+        if(tLeft <= 0)
+        {
+            if (!winScreen.activeSelf)
+            {
+                GameOver();
+            }
+        }
     }
 
+    public void GameOver()
+    {
+        gameOverScreen.SetActive(true);
+    }
+
+    public void Win()
+    {
+        winScreen.SetActive(true);
+    }
+
+    public void LoadMainMenu()
+    {
+
+        SceneManager.LoadScene(0);
+    }
 }
