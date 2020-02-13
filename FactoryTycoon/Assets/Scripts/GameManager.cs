@@ -40,7 +40,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(Input.GetKey(KeyCode.Escape))
+        {
+            QuitGame();
+        }
     }
 
     public void UpdateMoney(float cashSum)
@@ -100,5 +103,10 @@ public class GameManager : MonoBehaviour
         {
             question.SetActive(true);
         }
+    }
+
+    void QuitGame()
+    {
+        Application.Quit();
     }
 }
