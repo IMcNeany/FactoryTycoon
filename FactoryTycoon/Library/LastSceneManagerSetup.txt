@@ -1,5 +1,9 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: C:/Users/User/Documents/Masters/Animation/Assets/Scenes/SampleScene.unity
+=======
+- path: Assets/Scenes/MainMenu.unity
+>>>>>>> 19af2115a79b7ab1c296756d329a195491897cab
   isLoaded: 1
   isActive: 1
   isSubScene: 0

@@ -6,19 +6,23 @@ public class Production : MonoBehaviour
 {
     public GameObject waste;
     public GameObject rawMat;
+    public float wastePercent = 60.0f;
     GenerateGrid grid;
     float totalRawMat = 0;
 
 
     List<GridTile> productionTiles;
     List<GridTile> DisposalTiles;
+    List<GridTile> StorageTiles;
+    List<GridTile> WasteTiles;
     // Start is called before the first frame update
     void Start()
     {
         productionTiles = new List<GridTile>();
         DisposalTiles = new List<GridTile>();
-
-         grid = FindObjectOfType<GenerateGrid>();
+        StorageTiles = new List<GridTile>();
+        WasteTiles = new List<GridTile>();
+        grid = FindObjectOfType<GenerateGrid>();
     }
 
     // Update is called once per frame
@@ -27,21 +31,14 @@ public class Production : MonoBehaviour
         
     }
 
-    /* count the total raw materials
-     * find no of production machines
-     * divide items up between machines evenly
-     * items thorugh machine * productionquality (which is money made)
-     * add the money made from turning raw -> product
-     * check disposal machines, multiple = divide rescources amoung
-     * currently all will do landfill..
-     * */
-
     public void UseMaterials()
     {
 
-        UpdateStats();        totalRawMat = 0;
+        UpdateStats();
+        totalRawMat = 0;
         DisposalTiles.Clear();
         productionTiles.Clear();
+       
 
 
         for (int i = 0; i < grid.GetHeight(); i++)
@@ -51,6 +48,7 @@ public class Production : MonoBehaviour
                GridTile tile =  grid.GetGrid(i, j);
                 if (tile.factorySection == "Storage")
                 {
+
                     if (CountRawMats(tile))
                     {
                         tile.ResetTile();
@@ -58,6 +56,7 @@ public class Production : MonoBehaviour
                         Debug.Log(tile.gameObject.transform.GetChild(0).name);
                         Destroy(tile.gameObject.transform.GetChild(0).gameObject);
                     }
+                
                 }
 
                 if(tile.factorySection == "Factory")
@@ -76,10 +75,21 @@ public class Production : MonoBehaviour
 
         UseProductionMachines();
         UseDisposal();
-            IncreaseTurnCount();
+        CheckWasteStorage();
+        IncreaseTurnCount();
 
 
     }
+    bool CountWaste(GridTile tile)
+    {
+
+        if (tile.UpgradeSection == "Waste")
+        {
+            return true;
+        }
+        return false;
+    }
+
 
     bool CountRawMats(GridTile tile)
     {
@@ -205,4 +215,35 @@ public class Production : MonoBehaviour
     {
         GameManager gameManager = FindObjectOfType<GameManager>();
         gameManager.IncreaseTurn();
-    }}
+    }
+
+    void CheckWasteStorage()
+    {
+        StorageTiles.Clear();
+        WasteTiles.Clear();
+
+        for (int i = 0; i < grid.GetHeight(); i++)
+        {
+            for (int j = 0; j < grid.GetWidth(); j++)
+            {
+                GridTile tile = grid.GetGrid(i, j);
+                if (tile.factorySection == "Storage")
+                {
+                    StorageTiles.Add(tile);
+                    if (CountWaste(tile))
+                    {
+                        WasteTiles.Add(tile);
+                    }
+                }
+            }
+        }
+        float tiles = (float)WasteTiles.Count / (float)StorageTiles.Count;
+
+        if ((tiles* 100)>= wastePercent)
+        {
+            Debug.Log("Game over");
+            GameManager gameManager = FindObjectOfType<GameManager>();
+            gameManager.GameOver();
+        }
+    }
+}
