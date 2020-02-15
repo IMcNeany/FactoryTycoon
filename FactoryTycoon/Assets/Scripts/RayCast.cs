@@ -65,6 +65,10 @@ public class RayCast : MonoBehaviour
                 if (gridTile.factorySection == "Storage" && gridTile.occupied != true && activeUpgrade.spriteToPlace != null)
                 {
                     PlaceUpgrade(gridTile);
+                    if(gameManager.tutorialActive)
+                    {
+                        FindObjectOfType<Tutorial>().Turn(5);
+                    }
                 }
             }
             else

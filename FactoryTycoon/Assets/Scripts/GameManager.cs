@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public float economic = 0;
     public float social = 0;
     public float money = 1000;
+    public bool tutorialActive = true;
     int turn = 0;
 
     public float sellPrice = 100;
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
     public bool checkUIRayCast = true;
 
     public Upgrade activeUpgrade;
+    public GameObject tutorial;
     public TextMeshProUGUI cash;
     public TextMeshProUGUI socialText;
     public TextMeshProUGUI economicText;
@@ -44,7 +46,17 @@ public class GameManager : MonoBehaviour
         cash.SetText(" £" + money);
         SetObjectives();
         CalculateTurn();
+        if (tutorialActive)
+        {
+            //  FindObjectOfType<Tutorial>().gameObject.SetActive(true);
+            tutorial.SetActive(true);
+            //FindObjectOfType<Tutorial>().Turn(0);
+            tutorial.GetComponent<Tutorial>().Turn(0);
+        }
+
     }
+
+
 
     // Update is called once per frame
     void Update()

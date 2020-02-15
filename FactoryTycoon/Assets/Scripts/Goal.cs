@@ -11,6 +11,7 @@ public class Goal : MonoBehaviour
     int totalTurns;
     Difficulty currentDifficulty;
     public string goalText;
+    public bool tutorial = true;
 
     public enum Difficulty
     {
