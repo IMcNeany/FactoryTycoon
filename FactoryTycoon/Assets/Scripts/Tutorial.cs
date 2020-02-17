@@ -42,7 +42,7 @@ public class Tutorial : MonoBehaviour
         //production
         GridTile gridTile = FindEmpty();
         gridTile.occupied = true;
-        gridTile.itemQuantity = 1;
+        gridTile.itemQuantity = 80;
         //gridTile.tileUpgradeName = "RawMaterial";
         gridTile.UpgradeSection = production.GetComponent<ActiveUpgrade>().itemSection;
         // gridTile.transform.position;

@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.019607844, g: 0, b: 0.9607844, a: 1}
+  m_Color: {r: 0.9607843, g: 0.9229408, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -100,5 +100,5 @@ MonoBehaviour:
   itemEnvironmental: 0
   itemCost: 0
   ProductionQuantity: 100
-  spriteToPlace: {fileID: 91369809032495128, guid: ebbc895d0ce596f468273b2660bbba2c,
+  spriteToPlace: {fileID: 91369809032495128, guid: e5ae9842de4b9bd488314d6303dbced5,
     type: 3}
