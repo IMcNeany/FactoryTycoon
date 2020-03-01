@@ -128,6 +128,23 @@ public class Goal : MonoBehaviour
         
     }
 
+    public void ToggleTutorial()
+    {
+        if(tutorial)
+        {
+            tutorial = false;
+        }
+        else
+        {
+            tutorial = true;
+        }
+    }
+
+    public bool GetTutorial()
+    {
+        return tutorial;
+    }
+
     public int GetTotalTurns()
     {
         return totalTurns;

@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
         cash.SetText(" £" + money);
         SetObjectives();
         CalculateTurn();
+        tutorialActive = FindObjectOfType<Goal>().GetTutorial();
         if (tutorialActive)
         {
             //  FindObjectOfType<Tutorial>().gameObject.SetActive(true);
