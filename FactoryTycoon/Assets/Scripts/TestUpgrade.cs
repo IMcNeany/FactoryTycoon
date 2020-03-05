@@ -9,6 +9,8 @@ public class TestUpgrade : Upgrade
     [SerializeField]
     string itemDesc;
     [SerializeField]
+    string altDesc;
+    [SerializeField]
     float itemCost;
     [SerializeField]
     float itemSocial;
@@ -27,7 +29,7 @@ public class TestUpgrade : Upgrade
     {
 
         Upgrade parentUpgrade = this.gameObject.GetComponent<Upgrade>();
-        parentUpgrade.SetDesc(itemTitle, itemDesc, itemCost, itemSocial, itemEnvironmental, itemEconomic, sprite, SectionName, productionQuant);
+        parentUpgrade.SetDesc(itemTitle, itemDesc, itemCost, itemSocial, itemEnvironmental, itemEconomic, sprite, SectionName, productionQuant, altDesc);
     }
 
 

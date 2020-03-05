@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public float economic = 0;
     public float social = 0;
     public float money = 1000;
-    public bool tutorialActive = true;
+    public bool tutorialActive = false;
     int turn = 0;
 
     public float sellPrice = 100;

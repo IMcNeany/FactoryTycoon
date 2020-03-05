@@ -49,6 +49,12 @@ public class Upgrade : Upgrades
 
         }
 
+        TextMeshProUGUI altdescPanel = panel.transform.GetChild(1).transform.GetComponentInChildren<TextMeshProUGUI>();
+        if(altdescPanel.gameObject.name == "altDesc")
+        {
+            altdescPanel.SetText(altDescription);
+        }
+
        // Button[] buttons;
         buttons = panel.transform.GetChild(0).transform.GetComponentsInChildren<Button>();
         for (int i = 0; i < buttons.Length; i++)
@@ -62,10 +68,11 @@ public class Upgrade : Upgrades
 
     }
 
-    public void SetDesc(string upgradeName, string desc, float money, float itemSocial, float itemEco, float itemEnvironmental, GameObject tile, string SecName, float quantity)
+    public void SetDesc(string upgradeName, string desc, float money, float itemSocial, float itemEco, float itemEnvironmental, GameObject tile, string SecName, float quantity, string altDesc)
     {
         title = upgradeName;
         description = desc;
+        altDescription = altDesc;
         cost = money;
         social = itemSocial;
         economical = itemEco;

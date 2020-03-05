@@ -6,6 +6,7 @@ public class Upgrades : MonoBehaviour
 {
     protected string title;
     protected string description;
+    protected string altDescription;
     protected string itemUpgradeSection;
     protected Sprite image;
     protected float cost;
@@ -29,6 +30,7 @@ public class Upgrades : MonoBehaviour
     {
         return panel;
     }
+  
     // Update is called once per frame
     void Update()
     {
