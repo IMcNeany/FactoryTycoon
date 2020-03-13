@@ -70,8 +70,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 897cb56cebed05e40a33bd5ae832682e, type: 3}
-  m_Color: {r: 0, g: 0.12516737, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 3f74de2468639b34dbec11ad12c6df51, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -93,12 +93,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc841cabc687d044c966b02d3c9174f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: Example
+  title: 3D Printing
   itemSection: Production
   itemSocial: 0
   itemEconomical: 0
   itemEnvironmental: 0
   itemCost: 0
   ProductionQuantity: 100
-  spriteToPlace: {fileID: 91369809032495128, guid: ebbc895d0ce596f468273b2660bbba2c,
-    type: 3}
+  spriteToPlace: {fileID: 1938646889730943514}

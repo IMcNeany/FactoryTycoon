@@ -114,7 +114,7 @@ public class Upgrade : Upgrades
         gameManager.checkRayCast = true;
 
         //pass all infor to active upgrades
-        ActiveUpgrade activeUpgrade = GameObject.FindObjectOfType<ActiveUpgrade>();
+        ActiveUpgrade activeUpgrade = GameObject.FindObjectOfType<GameManager>().GetComponent<ActiveUpgrade>();
 
         activeUpgrade.title = title;
         activeUpgrade.itemSection = itemUpgradeSection;

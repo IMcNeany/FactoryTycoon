@@ -29,7 +29,7 @@ public class TestUpgrade : Upgrade
     {
 
         Upgrade parentUpgrade = this.gameObject.GetComponent<Upgrade>();
-        parentUpgrade.SetDesc(itemTitle, itemDesc, itemCost, itemSocial, itemEnvironmental, itemEconomic, sprite, SectionName, productionQuant, altDesc);
+        parentUpgrade.SetDesc(itemTitle, itemDesc, itemCost, itemSocial, itemEconomic, itemEnvironmental, sprite, SectionName, productionQuant, altDesc);
     }
 
 

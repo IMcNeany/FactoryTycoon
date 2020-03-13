@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
         SetObjectives();
         CalculateTurn();
         tutorialActive = FindObjectOfType<Goal>().GetTutorial();
+        
         if (tutorialActive)
         {
             //  FindObjectOfType<Tutorial>().gameObject.SetActive(true);
@@ -126,10 +127,10 @@ public class GameManager : MonoBehaviour
         //check if player has reached objective
         goalSetter.TurnGoal();
         CalculateTurn();
-        if (turn % 5 == 0)
-        {
-            question.SetActive(true);
-        }
+      //  if (turn % 5 == 0)
+       // {
+        //    question.SetActive(true);
+        //}
     }
 
     void SetObjectives()
@@ -147,15 +148,23 @@ public class GameManager : MonoBehaviour
 
     void CalculateTurn()
     {
+
         Goal goalSetter = FindObjectOfType<Goal>();
-        int tLeft = goalSetter.GetTotalTurns() - turn;
-        turnsLeft.SetText(tLeft.ToString());
-        if(tLeft <= 0)
+        if (goalSetter.GetTotalTurns() != -2)
         {
-            if (!winScreen.activeSelf)
+            int tLeft = goalSetter.GetTotalTurns() - turn;
+            turnsLeft.SetText("Turns left:" + tLeft.ToString());
+            if (tLeft <= 0)
             {
-                GameOver();
+                if (!winScreen.activeSelf)
+                {
+                    GameOver();
+                }
             }
+        }
+        else
+        {
+            turnsLeft.SetText("Turn:" + turn.ToString());
         }
   }
 

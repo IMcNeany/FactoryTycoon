@@ -8,7 +8,7 @@ public class Goal : MonoBehaviour
     float TargetEconomical;
     float TargetEnvironmental;
     float Targetmoney;
-    int totalTurns;
+    int totalTurns = -2;
     Difficulty currentDifficulty;
     public string goalText;
     public bool tutorial = true;
@@ -54,22 +54,54 @@ public class Goal : MonoBehaviour
                 break;
             case 1:
                 {
-                   
+                   if(gameManager.environment < TargetEnvironmental)
+                    {
+                        gameManager.GameOver();
+                    }
+                   else if(gameManager.money >= Targetmoney)
+                    {
+                        gameManager.Win();
+                    }
                 }
                 break;
             case 2:
                 {
-                    
+                    if(gameManager.social < TargetSocial)
+                    {
+                        gameManager.GameOver();
+                    }
+                    else if(gameManager.GetTurn() >= totalTurns)
+                    {
+                        gameManager.Win();
+                    }
                 }
                 break;
             case 3:
                 {
-                  
+                    if (gameManager.social < TargetSocial ||  gameManager.environment < TargetEnvironmental)
+                    {
+                        gameManager.GameOver();
+                    }
+                    else if(gameManager.GetTurn() >= totalTurns)
+                    {
+                        gameManager.Win();
+                    }
                 }
                 break;
             case 4:
                 {
-                  
+                    if (gameManager.social < TargetSocial || gameManager.economic < TargetEconomical || gameManager.environment < TargetEnvironmental)
+                    {
+                        gameManager.GameOver();
+                    }
+                    else if(gameManager.GetTurn() >= 20 && gameManager.money >= Targetmoney)
+                    {
+                        gameManager.Win();
+                    }
+                    else if(gameManager.GetTurn() > 20)
+                    {
+                        gameManager.GameOver();
+                    }
                 }
                 break;
         }
@@ -94,35 +126,44 @@ public class Goal : MonoBehaviour
         {
             case 0:
                 {
-                    goalText = "Make £500 in 5 turns";
-                    totalTurns = 5;
-                    Targetmoney = 500;
+                    goalText = "Make £1000 profit";
+                    //totalTurns = 5;
+                    Targetmoney = 1000;
                 }
                 break;
             case 1:
                 {
-                    goalText = "Not implemented yet";
-                   totalTurns = 15;
+                    goalText = "Make £2000 profit while keeping the environmental pillar above -5";
+                    // totalTurns = 15;
+                    TargetEnvironmental = -5;
+                    Targetmoney = 2000;
                 }
                 break;
             case 2:
                 {
-                    goalText = "Not implemented yet";
+                    goalText = "Keep the social pillar above -3 for 10 turns";
                     totalTurns = 10;
+                    TargetSocial = -3;
                 }
                 break;
             case 3:
                 {
-                    goalText = "Not implemented yet";
+                    goalText = "Keep the environmental and social pillars above 0 for 10 turns";
                     totalTurns = 10;
+                    TargetEnvironmental = 0;
+                    TargetSocial = 0;
                 }
                 break;
             case 4:
                 {
-                    goalText = "Not implemented yet";
-                    totalTurns = 10;
+                    goalText = "Be a perfect buisness, Keep all three pillars above 0 for 20 turns while making a profit of over 5000";
+                    totalTurns = 20;
+                    TargetSocial = 0;
+                    TargetEconomical = 0;
+                    TargetEnvironmental = 0;
+                    Targetmoney = 5000;
+                    break;
                 }
-                break;
         }
 
         
