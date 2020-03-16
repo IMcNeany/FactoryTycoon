@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
     public float social = 0;
     public float money = 1000;
     public bool tutorialActive = false;
+    public bool completedLevel = false;
+    public bool win = false;
+    public bool lose = false;
     int turn = 0;
 
     public float sellPrice = 100;
@@ -158,6 +161,8 @@ public class GameManager : MonoBehaviour
             {
                 if (!winScreen.activeSelf)
                 {
+                    completedLevel = true;
+                   
                     GameOver();
                 }
             }
@@ -170,11 +175,13 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        lose = true;
         gameOverScreen.SetActive(true);
     }
 
     public void Win()
     {
+        win = true;
         winScreen.SetActive(true);
     }
 

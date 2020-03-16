@@ -5886,6 +5886,7 @@ GameObject:
   - component: {fileID: 619827218}
   - component: {fileID: 619827220}
   - component: {fileID: 619827221}
+  - component: {fileID: 619827222}
   m_Layer: 0
   m_Name: GameManger
   m_TagString: Untagged
@@ -5910,6 +5911,9 @@ MonoBehaviour:
   social: 0
   money: 1000
   tutorialActive: 0
+  completedLevel: 0
+  win: 0
+  lose: 0
   sellPrice: 100
   question: {fileID: 697902996}
   uiUpgrades: {fileID: 2085997566}
@@ -5977,6 +5981,18 @@ MonoBehaviour:
   waste: {fileID: 91369809032495128, guid: 9e75ba1aab81c2e47ad8ea2a4576d1fe, type: 3}
   rawMat: {fileID: 91369809032495128, guid: 33c5dc096aececb4a8c178ebb2e5ccdf, type: 3}
   wastePercent: 60
+--- !u!114 &619827222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 619827217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cb25bd4e6d957b44b23b7570912d218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &620002555
 GameObject:
   m_ObjectHideFlags: 0
