@@ -15,4 +15,15 @@ public class UploadFile : MonoBehaviour
     {
         
     }
+
+    void AttemptUpload()
+    {
+
+    }
+
+    bool CheckInternet()
+    {
+
+        return false;
+    }
 }
