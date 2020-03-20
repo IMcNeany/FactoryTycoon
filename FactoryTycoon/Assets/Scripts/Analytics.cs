@@ -16,6 +16,9 @@ public class Analytics : MonoBehaviour
     float money = -10;
     int moreinfoClicked = 0;
     float timer = 0;
+     int ID = 0;
+    string difficultyLevel;
+    public bool statsSaved = false;
 
     private List<string[]> saveData = new List<string[]>();
 
@@ -27,6 +30,10 @@ public class Analytics : MonoBehaviour
         if (!File.Exists(getPath()))
         {
             FirstCSVSetup();
+        }
+        else
+        {
+            GetLastRowUsed();
         }
       
     }
@@ -48,6 +55,34 @@ public class Analytics : MonoBehaviour
         saveData.Add(headerRow);
 
         CreateDataFile();
+        ID = 1;
+    }
+
+    void GetLastRowUsed()
+    {
+        string fileData = System.IO.File.ReadAllText(getPath());
+       
+
+        string[] lines = fileData.Split("\n"[0]);
+
+
+
+
+        string[] lineData = (lines[(lines.Length-2)].Trim()).Split(","[0]);
+       
+
+        if(lineData[0] == "ID")
+        {
+            ID = 1;
+        }
+        else
+        {
+           
+            int.TryParse(lineData[0].ToString(),out int tmpID);
+        
+            ID = tmpID;
+            ID++;
+        }
     }
 
     // Update is called once per frame
@@ -58,19 +93,53 @@ public class Analytics : MonoBehaviour
             timer += Time.deltaTime;
         }
     }
-    //id
-    //time
-    //win / lose
-    //more info button clicked
-    //social stat
-    //eco stat
-    //econmical stat
-    //money stat
+
 
     public void SaveStats()
     {
+        saveData.Clear();
         GetStats();
-        CreateDataFile();
+     
+
+        string[] data = new string[11];
+        data[0] = ID.ToString();
+        data[1] = timer.ToString();
+        data[2] = gameComplete.ToString() ;
+        data[3] = Win.ToString();
+        data[4] = lose.ToString();
+        data[5] = difficultyLevel;
+        data[6] = social.ToString();
+        data[7] = environmental.ToString();
+        data[8] = economical.ToString();
+        data[9] = money.ToString();
+        data[10] = moreinfoClicked.ToString();
+        saveData.Add(data);
+
+        string[][] output = new string[saveData.Count][];
+      
+
+        for (int i = 0; i < output.Length; i++)
+        {
+            output[i] = saveData[i];
+        }
+
+        int length = output.GetLength(0);
+        string delimiter = ",";
+
+        StringBuilder sb = new StringBuilder();
+
+        for (int index = 0; index < length; index++)
+            sb.AppendLine(string.Join(delimiter, output[index]));
+
+
+        string filePath = getPath();
+
+        StreamWriter outStream = System.IO.File.AppendText(filePath);
+        
+        outStream.Write(sb);
+        outStream.Close();
+
+        statsSaved = true;
     }
 
     public void MoreInfoButtonClicked()
@@ -80,6 +149,7 @@ public class Analytics : MonoBehaviour
 
     void GetStats()
     {
+      
         social = gameManager.social;
         environmental = gameManager.environment;
         economical = gameManager.economic;
@@ -87,6 +157,8 @@ public class Analytics : MonoBehaviour
         gameComplete = gameManager.completedLevel;
         lose = gameManager.lose;
         Win = gameManager.win;
+        moreinfoClicked = gameManager.moreInfoEngagement;
+        difficultyLevel = gameManager.difficultyLevel;
 
     }
 

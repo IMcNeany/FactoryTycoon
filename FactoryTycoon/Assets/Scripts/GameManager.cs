@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public bool win = false;
     public bool lose = false;
     int turn = 0;
+    public int moreInfoEngagement = 0;
+    public string difficultyLevel = null;
 
     public float sellPrice = 100;
     public GameObject question;
@@ -50,7 +52,7 @@ public class GameManager : MonoBehaviour
         SetObjectives();
         CalculateTurn();
         tutorialActive = FindObjectOfType<Goal>().GetTutorial();
-        
+        difficultyLevel = FindObjectOfType<Goal>().GetDifficulty();
         if (tutorialActive)
         {
             //  FindObjectOfType<Tutorial>().gameObject.SetActive(true);
@@ -66,7 +68,12 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.S))
+        {
+            FindObjectOfType<Analytics>().SaveStats();
+        }
+
+        if (Input.GetKey(KeyCode.Escape))
         {
             QuitGame();
         }
@@ -144,9 +151,21 @@ public class GameManager : MonoBehaviour
        Goals.SetText(goalSetter.goalText);
     }
 
+    public void MoreInfoClicked()
+    {
+        moreInfoEngagement++;
+    }
+
    void QuitGame()
     {
+        Analytics analytics = FindObjectOfType<Analytics>();
+        analytics.SaveStats();
+        while(analytics.statsSaved != true)
+        {
+
+        }
         Application.Quit();
+  
     }
 
     void CalculateTurn()
@@ -175,13 +194,18 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+      
         lose = true;
+        Analytics analytics = FindObjectOfType<Analytics>();
+        analytics.SaveStats();
         gameOverScreen.SetActive(true);
     }
 
     public void Win()
     {
         win = true;
+        Analytics analytics = FindObjectOfType<Analytics>();
+        analytics.SaveStats();
         winScreen.SetActive(true);
     }
 

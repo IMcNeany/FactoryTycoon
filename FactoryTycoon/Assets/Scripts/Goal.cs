@@ -181,6 +181,11 @@ public class Goal : MonoBehaviour
         }
     }
 
+    public string GetDifficulty()
+    {
+        return currentDifficulty.ToString();
+    }
+
     public bool GetTutorial()
     {
         return tutorial;
