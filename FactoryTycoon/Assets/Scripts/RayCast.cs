@@ -97,6 +97,7 @@ public class RayCast : MonoBehaviour
         gameManager.UpdateEnvironmental(activeUpgrade.itemEnvironmental);
         gameManager.UpdateSocial(activeUpgrade.itemSocial);
 
+        gameManager.GetComponent<AudioSource>().Play();
         StartTurn turnButton = FindObjectOfType<StartTurn>();
         turnButton.CheckTiles();
 

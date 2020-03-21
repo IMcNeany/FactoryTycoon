@@ -53,6 +53,7 @@ public class UIRayCaster : MonoBehaviour
     {
         if(result.gameObject.name == "Purchase")
         {
+            result.gameObject.GetComponent<AudioSource>().Play();
            Upgrade upgrade = gameManager.activeUpgrade;
             upgrade.PlaceUpgrade();
        
