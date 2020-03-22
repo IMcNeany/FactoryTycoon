@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: GoogleDriveSettings
   m_EditorClassIdentifier: 
   genericClientCredentials:
-    client_id: 
-    project_id: 
-    auth_uri: 
-    token_uri: 
-    auth_provider_x509_cert_url: 
-    client_secret: 
-    redirect_uris: []
+    client_id: 139495840553-fg28q4b57gtliqli4lim4d5ui5m1hb3o.apps.googleusercontent.com
+    project_id: mimetic-maxim-271821
+    auth_uri: https://accounts.google.com/o/oauth2/auth
+    token_uri: https://oauth2.googleapis.com/token
+    auth_provider_x509_cert_url: https://www.googleapis.com/oauth2/v1/certs
+    client_secret: 5Ho8ic7u31wZ80uI1lkfAuIE
+    redirect_uris:
+    - http://localhost
   uriSchemeClientCredentials:
     clientId: 
     reversedClientId: 

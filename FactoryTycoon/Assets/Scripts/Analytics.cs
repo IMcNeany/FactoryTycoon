@@ -139,6 +139,7 @@ public class Analytics : MonoBehaviour
         outStream.Write(sb);
         outStream.Close();
 
+        FindObjectOfType<UploadFile>().AttemptUpload();
         statsSaved = true;
     }
 

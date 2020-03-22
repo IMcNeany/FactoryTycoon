@@ -550,3 +550,6 @@ E:\Isobel\Documents\Masters\FactoryTycoon\FactoryTycoon\Temp\bin\Debug\UnityEngi
 E:\Isobel\Documents\Masters\FactoryTycoon\FactoryTycoon\Temp\bin\Debug\UnityEngine.XRModule.xml
 E:\Isobel\Documents\Masters\FactoryTycoon\FactoryTycoon\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 E:\Isobel\Documents\Masters\FactoryTycoon\FactoryTycoon\obj\Debug\Assembly-CSharp.pdb
+C:\Users\User\Documents\Masters\FactoryTycoon\FactoryTycoon\Temp\bin\Debug\Newtonsoft.Json.dll
+C:\Users\User\Documents\Masters\FactoryTycoon\FactoryTycoon\Temp\bin\Debug\Elringus.UnityGoogleDrive.Editor.pdb
+C:\Users\User\Documents\Masters\FactoryTycoon\FactoryTycoon\Temp\bin\Debug\Elringus.UnityGoogleDrive.Runtime.pdb
