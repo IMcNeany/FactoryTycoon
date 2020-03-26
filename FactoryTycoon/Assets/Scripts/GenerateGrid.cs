@@ -8,14 +8,14 @@ public class GenerateGrid : MonoBehaviour
     int factoryHeight = 7; public int GetHeight() { return factoryHeight; }
     int factoryWidth = 6; public int GetWidth() { return factoryWidth; }
     float squareSize = 1;
-    GameObject gridSquare;
+   public GameObject gridSquare;
     GridTile[,] gridTiles;
 
     // Start is called before the first frame update
     void Start()
     {
         gridTiles = new GridTile[factoryHeight,factoryWidth];
-        gridSquare = Resources.Load("Grid") as GameObject;
+       // gridSquare = Resources.Load("Grid") as GameObject;
 
         CreateGrid();
 

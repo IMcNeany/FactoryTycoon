@@ -22,7 +22,10 @@ public class GameManager : MonoBehaviour
     public string difficultyLevel = null;
 
     public float sellPrice = 100;
-    public GameObject question;
+  //  public GameObject question;
+
+    public GameObject wasteSelling;
+    public Button wasteClose;
 
 
     public GameObject uiUpgrades;
@@ -31,23 +34,28 @@ public class GameManager : MonoBehaviour
 
     public Upgrade activeUpgrade;
     public GameObject tutorial;
+
     public TextMeshProUGUI cash;
     public TextMeshProUGUI socialText;
     public TextMeshProUGUI economicText;
     public TextMeshProUGUI environmentText;
-    public Slider socialSlider;
-    public Slider economicSlider;
-    public Slider environmentSlider;
+
     public TextMeshProUGUI Goals;
     public TextMeshProUGUI turnsLeft;
+
+
     public GameObject gameOverScreen;
-    public GameObject winScreen;
+    public TextMeshProUGUI winOrLose;
+    public TextMeshProUGUI StatsText;
+    public AudioClip winner;
+    public AudioClip loser;
+    public AudioSource gameoverAudio;
 
     // Start is called before the first frame update
     void Start()
     {
         gameOverScreen.SetActive(false);
-        winScreen.SetActive(false);
+       
         cash.SetText(" £" + money);
         SetObjectives();
         CalculateTurn();
@@ -116,13 +124,6 @@ public class GameManager : MonoBehaviour
         economicText.SetText(economic.ToString());
         environmentText.SetText(environment.ToString());
 
-
-        socialSlider.SetValueWithoutNotify(social);
-        economicSlider.SetValueWithoutNotify(economic);
-        environmentSlider.SetValueWithoutNotify(environment);
-
-
-
     }
    public int GetTurn()
     {
@@ -168,6 +169,19 @@ public class GameManager : MonoBehaviour
   
     }
 
+    public void OpenWaste()
+    {
+        if(money - 100 >= 0)
+        {
+            wasteClose.interactable = true;
+        }
+        else
+        {
+            wasteClose.interactable = false;
+        }
+        wasteSelling.SetActive(true);
+    }
+
     void CalculateTurn()
     {
 
@@ -178,7 +192,7 @@ public class GameManager : MonoBehaviour
             turnsLeft.SetText("Turns left:" + tLeft.ToString());
             if (tLeft <= 0)
             {
-                if (!winScreen.activeSelf)
+                if (!gameOverScreen.activeSelf)
                 {
                     completedLevel = true;
                    
@@ -198,15 +212,25 @@ public class GameManager : MonoBehaviour
         lose = true;
         Analytics analytics = FindObjectOfType<Analytics>();
         analytics.SaveStats();
+        winOrLose.SetText("You lost..");
+
+        StatsText.SetText("You made £" + money + " in " + turn + " turns's. You achieved a social rating of " + social + ", an economic rating of " + economic + " and an environmental rating of " + environment + ".");
+        gameoverAudio.clip = loser;
         gameOverScreen.SetActive(true);
     }
 
     public void Win()
     {
+        completedLevel = true;
         win = true;
         Analytics analytics = FindObjectOfType<Analytics>();
         analytics.SaveStats();
-        winScreen.SetActive(true);
+        winOrLose.SetText("You Won!");
+        StatsText.SetText("You made £" + money + " in " + turn + " turns's. You achieved a social rating of " + social + ", an economic rating of " + economic + " and an environmental rating of " + environment + ".");
+        // winScreen.SetActive(true);
+        gameoverAudio.clip = winner;
+        gameOverScreen.SetActive(true);
+
     }
 
     public void LoadMainMenu()

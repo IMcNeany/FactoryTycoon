@@ -19,6 +19,7 @@ public class Analytics : MonoBehaviour
      int ID = 0;
     string difficultyLevel;
     public bool statsSaved = false;
+    bool CollectionAgreed = false;
 
     private List<string[]> saveData = new List<string[]>();
 
@@ -26,14 +27,17 @@ public class Analytics : MonoBehaviour
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
-      
-        if (!File.Exists(getPath()))
+        CollectionAgreed = FindObjectOfType<UploadFile>().analticsAgreed;
+        if (CollectionAgreed)
         {
-            FirstCSVSetup();
-        }
-        else
-        {
-            GetLastRowUsed();
+            if (!File.Exists(getPath()))
+            {
+                FirstCSVSetup();
+            }
+            else
+            {
+                GetLastRowUsed();
+            }
         }
       
     }
@@ -97,50 +101,53 @@ public class Analytics : MonoBehaviour
 
     public void SaveStats()
     {
-        saveData.Clear();
-        GetStats();
-     
-
-        string[] data = new string[11];
-        data[0] = ID.ToString();
-        data[1] = timer.ToString();
-        data[2] = gameComplete.ToString() ;
-        data[3] = Win.ToString();
-        data[4] = lose.ToString();
-        data[5] = difficultyLevel;
-        data[6] = social.ToString();
-        data[7] = environmental.ToString();
-        data[8] = economical.ToString();
-        data[9] = money.ToString();
-        data[10] = moreinfoClicked.ToString();
-        saveData.Add(data);
-
-        string[][] output = new string[saveData.Count][];
-      
-
-        for (int i = 0; i < output.Length; i++)
+        if (CollectionAgreed)
         {
-            output[i] = saveData[i];
+            saveData.Clear();
+            GetStats();
+
+
+            string[] data = new string[11];
+            data[0] = ID.ToString();
+            data[1] = timer.ToString();
+            data[2] = gameComplete.ToString();
+            data[3] = Win.ToString();
+            data[4] = lose.ToString();
+            data[5] = difficultyLevel;
+            data[6] = social.ToString();
+            data[7] = environmental.ToString();
+            data[8] = economical.ToString();
+            data[9] = money.ToString();
+            data[10] = moreinfoClicked.ToString();
+            saveData.Add(data);
+
+            string[][] output = new string[saveData.Count][];
+
+
+            for (int i = 0; i < output.Length; i++)
+            {
+                output[i] = saveData[i];
+            }
+
+            int length = output.GetLength(0);
+            string delimiter = ",";
+
+            StringBuilder sb = new StringBuilder();
+
+            for (int index = 0; index < length; index++)
+                sb.AppendLine(string.Join(delimiter, output[index]));
+
+
+            string filePath = getPath();
+
+            StreamWriter outStream = System.IO.File.AppendText(filePath);
+
+            outStream.Write(sb);
+            outStream.Close();
+
+            FindObjectOfType<UploadFile>().AttemptUpload();
+            statsSaved = true;
         }
-
-        int length = output.GetLength(0);
-        string delimiter = ",";
-
-        StringBuilder sb = new StringBuilder();
-
-        for (int index = 0; index < length; index++)
-            sb.AppendLine(string.Join(delimiter, output[index]));
-
-
-        string filePath = getPath();
-
-        StreamWriter outStream = System.IO.File.AppendText(filePath);
-        
-        outStream.Write(sb);
-        outStream.Close();
-
-        FindObjectOfType<UploadFile>().AttemptUpload();
-        statsSaved = true;
     }
 
     public void MoreInfoButtonClicked()

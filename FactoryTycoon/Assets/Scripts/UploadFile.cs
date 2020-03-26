@@ -6,16 +6,25 @@ using System.IO;
 
 public class UploadFile : MonoBehaviour
 {
+
+    public bool analticsAgreed = false;
     // Start is called before the first frame update
     void Start()
     {
+        if (analticsAgreed)
+        {
             AttemptUpload();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    public void Consent(bool agree)
+    {
+        analticsAgreed = agree;
     }
 
     public void AttemptUpload()

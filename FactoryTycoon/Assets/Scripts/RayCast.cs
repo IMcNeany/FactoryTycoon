@@ -7,6 +7,7 @@ public class RayCast : MonoBehaviour
 {
     public GameManager gameManager;
     public ActiveUpgrade activeUpgrade;
+    GridTile CurrentWasteGameTile = null;
 
 
     // Start is called before the first frame update
@@ -59,8 +60,14 @@ public class RayCast : MonoBehaviour
         {
             //Will check if upgrade has been selected and place it
             GridTile gridTile = hitObject.GetComponent<GridTile>();
-            Debug.Log("grid obj");
-            if (activeUpgrade.itemSection == "RawMaterial")
+
+             if (gridTile.occupied == true && gridTile.UpgradeSection == "Waste")
+             {
+                gameManager.OpenWaste();
+                CurrentWasteGameTile = gridTile;
+
+             }
+            else if (activeUpgrade.itemSection == "RawMaterial")
             {
                 if (gridTile.factorySection == "Storage" && gridTile.occupied != true && activeUpgrade.spriteToPlace != null)
                 {
@@ -71,14 +78,25 @@ public class RayCast : MonoBehaviour
                     }
                 }
             }
-            else
+            else if (gridTile.factorySection == "Factory" && gridTile.occupied != true && activeUpgrade.spriteToPlace != null)
             {
-                if (gridTile.factorySection == "Factory" && gridTile.occupied != true && activeUpgrade.spriteToPlace != null)
-                {
                     PlaceUpgrade(gridTile);
-                }
             }
+         
+
+            
         }
+    }
+
+    public void SellWaste()
+    {
+        CurrentWasteGameTile.occupied = false;
+        CurrentWasteGameTile.tileUpgradeName = "";
+        CurrentWasteGameTile.UpgradeSection = "";
+        CurrentWasteGameTile.itemQuantity = 0;
+        activeUpgrade.spriteToPlace = null;
+        Destroy(CurrentWasteGameTile.transform.GetChild(0).gameObject);
+        gameManager.UpdateMoney(-100);
     }
 
     void PlaceUpgrade(GridTile gridTile)
@@ -101,6 +119,6 @@ public class RayCast : MonoBehaviour
         StartTurn turnButton = FindObjectOfType<StartTurn>();
         turnButton.CheckTiles();
 
-        gameManager.checkRayCast = false;
+        gameManager.checkRayCast = true;
     }
 }

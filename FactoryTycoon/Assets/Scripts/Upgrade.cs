@@ -8,6 +8,7 @@ public class Upgrade : Upgrades
 {
     Button[] buttons;
     GameManager gameManager;
+    GameObject copyPanel;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -18,24 +19,29 @@ public class Upgrade : Upgrades
 
     void CreatePanel()
     {
-        base.Start();
+        //base.Start();
         //parent of the parent
-        panel = base.GetPanelRef();
+        copyPanel = Instantiate( base.GetPanelRef());
+      
+      
         Transform parent = this.transform.parent;
         Transform panelParent = parent.transform.parent;
-        panel.transform.SetParent(panelParent);
-        panel.transform.localScale = Vector3.one;
-        panel.transform.localPosition = Vector3.zero;
-        RectTransform panelRect = panel.GetComponent<RectTransform>();
+        Transform panelParentParent = panelParent.transform.parent;
+        // panel = Instantiate(base.GetPanelRef(),panelParentParent);
+        copyPanel.transform.SetParent(panelParentParent);
+        copyPanel.transform.localScale = Vector3.one;
+        copyPanel.transform.localPosition = Vector3.zero;
+        RectTransform panelRect = copyPanel.GetComponent<RectTransform>();
         panelRect.offsetMax = Vector3.zero;
         panelRect.offsetMin = Vector3.zero;
+        copyPanel.SetActive(false);
     }
 
     void UpdatePanel()
     {
         //turn to list
         TextMeshProUGUI[] textBoxes;
-           textBoxes = panel.transform.GetChild(0).transform.GetComponentsInChildren<TextMeshProUGUI>();
+           textBoxes = copyPanel.transform.GetChild(0).transform.GetComponentsInChildren<TextMeshProUGUI>();
         for (int i = 0; i < textBoxes.Length; i++)
         {
             if (textBoxes[i].gameObject.name == "Title")
@@ -49,14 +55,14 @@ public class Upgrade : Upgrades
 
         }
 
-        TextMeshProUGUI altdescPanel = panel.transform.GetChild(1).transform.GetComponentInChildren<TextMeshProUGUI>();
+        TextMeshProUGUI altdescPanel = copyPanel.transform.GetChild(1).transform.GetComponentInChildren<TextMeshProUGUI>();
         if(altdescPanel.gameObject.name == "altDesc")
         {
             altdescPanel.SetText(altDescription);
         }
 
        // Button[] buttons;
-        buttons = panel.transform.GetChild(0).transform.GetComponentsInChildren<Button>();
+        buttons = copyPanel.transform.GetChild(0).transform.GetComponentsInChildren<Button>();
         for (int i = 0; i < buttons.Length; i++)
         {
             if (buttons[i].gameObject.name == "Purchase")
@@ -127,14 +133,14 @@ public class Upgrade : Upgrades
 
 
         gameManager.CloseUpgradeUI();
-        Destroy(panel);
+        Destroy(copyPanel);
 
     }
 
      public void ButtonClicked()
 
     {
-        if(panel == null)
+        if(copyPanel == null)
         {
             CreatePanel();
         }
@@ -143,6 +149,6 @@ public class Upgrade : Upgrades
        // base.OnButtonClicked();
         UpdatePanel();
         CheckPurchaseCost();
-        panel.SetActive(true);
+        copyPanel.SetActive(true);
     }
 }

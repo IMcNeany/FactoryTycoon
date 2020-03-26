@@ -19,11 +19,11 @@ public class Upgrades : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        GameObject loadedPanel = Resources.Load("Upgrade Panel") as GameObject;
+       // GameObject loadedPanel = Resources.Load("Upgrade Panel") as GameObject;
 
         //spawn the panel
-        panel = Instantiate(loadedPanel);
-        panel.SetActive(false);
+      //  Instantiate(panel);
+    //    panel.SetActive(false);
     }
 
    protected GameObject GetPanelRef()

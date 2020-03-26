@@ -21,37 +21,40 @@ public class StartTurn : MonoBehaviour
 
     public void CheckTiles()
     {
-        //GridTile[,] gridTiles = new GridTile[grid.GetHeight(), grid.GetWidth()];
-        //   gridTiles = grid.GetGrid();
-        int disposal = 0;
-        int rawMaterial = 0;
-        int production = 0;
-
-        for(int i = 0; i < grid.GetHeight(); i++)
+        if (FindObjectOfType<GameManager>().tutorialActive)
         {
-            for (int j = 0; j < grid.GetWidth(); j++)
+            //GridTile[,] gridTiles = new GridTile[grid.GetHeight(), grid.GetWidth()];
+            //   gridTiles = grid.GetGrid();
+            int disposal = 0;
+            int rawMaterial = 0;
+            int production = 0;
+
+            for (int i = 0; i < grid.GetHeight(); i++)
             {
-                if(grid.GetGrid(i,j).UpgradeSection == "Disposal")
+                for (int j = 0; j < grid.GetWidth(); j++)
                 {
-                    disposal++;
-                }
-                else if(grid.GetGrid(i, j).UpgradeSection == "RawMaterial")
-                {
-                    rawMaterial++;
-                }
-                else if(grid.GetGrid(i, j).UpgradeSection == "Production")
-                {
-                    production++;
+                    if (grid.GetGrid(i, j).UpgradeSection == "Disposal")
+                    {
+                        disposal++;
+                    }
+                    else if (grid.GetGrid(i, j).UpgradeSection == "RawMaterial")
+                    {
+                        rawMaterial++;
+                    }
+                    else if (grid.GetGrid(i, j).UpgradeSection == "Production")
+                    {
+                        production++;
+                    }
                 }
             }
-        }
-        if(disposal > 0 && rawMaterial > 0 && production > 0)
-        {
-            GetComponent<Button>().interactable = true;
-        }
-        else
-        {
-            GetComponent<Button>().interactable = false;
+            if (disposal > 0 && rawMaterial > 0 && production > 0)
+            {
+                GetComponent<Button>().interactable = true;
+            }
+            else
+            {
+                GetComponent<Button>().interactable = false;
+            }
         }
 
     }

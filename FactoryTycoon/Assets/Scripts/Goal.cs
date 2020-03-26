@@ -126,17 +126,17 @@ public class Goal : MonoBehaviour
         {
             case 0:
                 {
-                    goalText = "Make £1000 profit";
+                    goalText = "Make £500 profit";
                     //totalTurns = 5;
-                    Targetmoney = 1000;
+                    Targetmoney = 500;
                 }
                 break;
             case 1:
                 {
-                    goalText = "Make £2000 profit while keeping the environmental pillar above -5";
+                    goalText = "Make £1000 profit while keeping the environmental pillar above -5";
                     // totalTurns = 15;
                     TargetEnvironmental = -5;
-                    Targetmoney = 2000;
+                    Targetmoney = 1000;
                 }
                 break;
             case 2:
@@ -156,12 +156,12 @@ public class Goal : MonoBehaviour
                 break;
             case 4:
                 {
-                    goalText = "Be a perfect buisness, Keep all three pillars above 0 for 20 turns while making a profit of over 5000";
+                    goalText = "Be a perfect buisness, Keep all three pillars above 0 for 20 turns while making a profit of over 3000";
                     totalTurns = 20;
                     TargetSocial = 0;
                     TargetEconomical = 0;
                     TargetEnvironmental = 0;
-                    Targetmoney = 5000;
+                    Targetmoney = 3000;
                     break;
                 }
         }

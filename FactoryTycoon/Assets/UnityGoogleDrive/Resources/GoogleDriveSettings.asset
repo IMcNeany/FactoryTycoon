@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GoogleDriveSettings
   m_EditorClassIdentifier: 
   genericClientCredentials:
-    client_id: 139495840553-fg28q4b57gtliqli4lim4d5ui5m1hb3o.apps.googleusercontent.com
+    client_id: 139495840553-al881er8q9vqfgs7io04mtsknurfsj0v.apps.googleusercontent.com
     project_id: mimetic-maxim-271821
     auth_uri: https://accounts.google.com/o/oauth2/auth
     token_uri: https://oauth2.googleapis.com/token
@@ -22,10 +22,10 @@ MonoBehaviour:
     redirect_uris:
     - http://localhost
   uriSchemeClientCredentials:
-    clientId: 
-    reversedClientId: 
-    plistVersion: 
-    bundleId: 
+    clientId: 139495840553-mfn0i1gv4kldlselq0l8kgovp30rbf7q.apps.googleusercontent.com
+    reversedClientId: com.googleusercontent.apps.139495840553-mfn0i1gv4kldlselq0l8kgovp30rbf7q
+    plistVersion: 1
+    bundleId: com.DefaultCompany.FactoryTycoon
   accessScopes:
   - https://www.googleapis.com/auth/drive
   - https://www.googleapis.com/auth/drive.appdata
