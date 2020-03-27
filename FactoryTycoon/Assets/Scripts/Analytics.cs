@@ -28,8 +28,8 @@ public class Analytics : MonoBehaviour
     {
         gameManager = FindObjectOfType<GameManager>();
         CollectionAgreed = FindObjectOfType<UploadFile>().analticsAgreed;
-        if (CollectionAgreed)
-        {
+     
+            Debug.Log(getPath());
             if (!File.Exists(getPath()))
             {
                 FirstCSVSetup();
@@ -38,7 +38,6 @@ public class Analytics : MonoBehaviour
             {
                 GetLastRowUsed();
             }
-        }
       
     }
 
@@ -199,11 +198,11 @@ public class Analytics : MonoBehaviour
     private string getPath()
     {
 #if UNITY_EDITOR
-        return Application.dataPath + "/CSV/" + "Saved_data.csv";
+        return Application.dataPath + "/CSV/" + "Saved_data" + SystemInfo.deviceUniqueIdentifier + ".csv";
 #elif UNITY_ANDROID
-        return Application.persistentDataPath+"Saved_data.csv";
+        return Application.persistentDataPath+"Saved_data" + SystemInfo.deviceUniqueIdentifier +".csv";
 #else
-        return Application.dataPath +"/"+"Saved_data.csv";
+        return Application.dataPath +"/"+"Saved_data" + SystemInfo.deviceUniqueIdentifier +".csv";
 #endif
     }
 }

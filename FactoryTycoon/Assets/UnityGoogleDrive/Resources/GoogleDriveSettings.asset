@@ -25,7 +25,7 @@ MonoBehaviour:
     clientId: 139495840553-mfn0i1gv4kldlselq0l8kgovp30rbf7q.apps.googleusercontent.com
     reversedClientId: com.googleusercontent.apps.139495840553-mfn0i1gv4kldlselq0l8kgovp30rbf7q
     plistVersion: 1
-    bundleId: com.DefaultCompany.FactoryTycoon
+    bundleId: com.defaultcompany.factorytycoon
   accessScopes:
   - https://www.googleapis.com/auth/drive
   - https://www.googleapis.com/auth/drive.appdata

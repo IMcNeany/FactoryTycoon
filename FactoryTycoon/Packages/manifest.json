@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.elringus.unitygoogledrive": "file:C:/Users/User/Downloads/UnityGoogleDrive-package/UnityGoogleDrive-package",
+    "com.elringus.unitygoogledrive": "file:C:/Users/User/Downloads/UnityGoogleDrive-0.26-alpha/UnityGoogleDrive-0.26-alpha/Assets/UnityGoogleDrive",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.2d.tilemap": "1.0.0",
     "com.unity.ads": "2.0.8",

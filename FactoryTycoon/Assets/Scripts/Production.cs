@@ -38,34 +38,55 @@ public class Production : MonoBehaviour
         totalRawMat = 0;
         DisposalTiles.Clear();
         productionTiles.Clear();
-       
 
 
+        if (CountProductionAndWaste())
+        {
+            for (int i = 0; i < grid.GetHeight(); i++)
+            {
+                for (int j = 0; j < grid.GetWidth(); j++)
+                {
+                    GridTile tile = grid.GetGrid(i, j);
+                    if (tile.factorySection == "Storage")
+                    {
+
+                        if (CountRawMats(tile))
+                        {
+                            tile.ResetTile();
+
+                            Debug.Log(tile.gameObject.transform.GetChild(0).name);
+                            Destroy(tile.gameObject.transform.GetChild(0).gameObject);
+                        }
+
+                    }
+
+
+                }
+            }
+
+            UseProductionMachines();
+            UseDisposal();
+            CheckWasteStorage();
+        }
+        IncreaseTurnCount();
+
+
+    }
+    bool CountProductionAndWaste()
+    {
         for (int i = 0; i < grid.GetHeight(); i++)
         {
-            for(int j = 0; j < grid.GetWidth();j++)
+            for (int j = 0; j < grid.GetWidth(); j++)
             {
-               GridTile tile =  grid.GetGrid(i, j);
-                if (tile.factorySection == "Storage")
+                GridTile tile = grid.GetGrid(i, j);
+
+                if (tile.factorySection == "Factory")
                 {
-
-                    if (CountRawMats(tile))
-                    {
-                        tile.ResetTile();
-
-                        Debug.Log(tile.gameObject.transform.GetChild(0).name);
-                        Destroy(tile.gameObject.transform.GetChild(0).gameObject);
-                    }
-                
-                }
-
-                if(tile.factorySection == "Factory")
-                {
-                    if(tile.UpgradeSection == "Production")
+                    if (tile.UpgradeSection == "Production")
                     {
                         productionTiles.Add(tile);
                     }
-                    else if(tile.UpgradeSection == "Disposal")
+                    else if (tile.UpgradeSection == "Disposal")
                     {
                         DisposalTiles.Add(tile);
                     }
@@ -73,13 +94,13 @@ public class Production : MonoBehaviour
             }
         }
 
-        UseProductionMachines();
-        UseDisposal();
-        CheckWasteStorage();
-        IncreaseTurnCount();
-
-
+        if(productionTiles.Count >= 1 && DisposalTiles.Count >= 1)
+        {
+            return true;
+        }
+        return false;
     }
+
     bool CountWaste(GridTile tile)
     {
 

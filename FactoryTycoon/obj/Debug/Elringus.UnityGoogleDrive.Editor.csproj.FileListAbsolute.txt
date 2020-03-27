@@ -282,3 +282,8 @@ C:\Users\User\Documents\Masters\FactoryTycoon\FactoryTycoon\obj\Debug\Elringus.U
 C:\Users\User\Documents\Masters\FactoryTycoon\FactoryTycoon\obj\Debug\Elringus.UnityGoogleDrive.Editor.csproj.CopyComplete
 C:\Users\User\Documents\Masters\FactoryTycoon\FactoryTycoon\obj\Debug\Elringus.UnityGoogleDrive.Editor.dll
 C:\Users\User\Documents\Masters\FactoryTycoon\FactoryTycoon\obj\Debug\Elringus.UnityGoogleDrive.Editor.pdb
+C:\Users\User\Documents\Masters\FactoryTycoon\FactoryTycoon\Temp\bin\Debug\Google.IOSResolver_v1.2.143.dll
+C:\Users\User\Documents\Masters\FactoryTycoon\FactoryTycoon\Temp\bin\Debug\Google.JarResolver_v1.2.143.dll
+C:\Users\User\Documents\Masters\FactoryTycoon\FactoryTycoon\Temp\bin\Debug\Google.UnityPackageManagerResolver_v1.2.143.dll
+C:\Users\User\Documents\Masters\FactoryTycoon\FactoryTycoon\Temp\bin\Debug\Google.VersionHandler.dll
+C:\Users\User\Documents\Masters\FactoryTycoon\FactoryTycoon\Temp\bin\Debug\Google.VersionHandlerImpl_v1.2.143.dll

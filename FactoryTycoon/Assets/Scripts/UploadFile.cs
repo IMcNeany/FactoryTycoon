@@ -25,6 +25,10 @@ public class UploadFile : MonoBehaviour
     public void Consent(bool agree)
     {
         analticsAgreed = agree;
+        if (analticsAgreed)
+        {
+            AttemptUpload();
+        }
     }
 
     public void AttemptUpload()
@@ -50,8 +54,10 @@ public class UploadFile : MonoBehaviour
     }
     IEnumerator CheckFilesExists()
     {
-     //   GoogleDriveRequest googleDriveRequest;
-       // googleDriveRequest.Uri
+        //   GoogleDriveRequest googleDriveRequest;
+        // googleDriveRequest.Uri
+
+      
         UnityGoogleDrive.GoogleDriveFiles.ListRequest list = GoogleDriveFiles.List();
         list.Q = "name = 'Saved_data.csv'";
 
@@ -118,11 +124,11 @@ public class UploadFile : MonoBehaviour
     private string getPath()
     {
 #if UNITY_EDITOR
-        return Application.dataPath + "/CSV/" + "Saved_data.csv";
+        return Application.dataPath + "/CSV/" + "Saved_data" + SystemInfo.deviceUniqueIdentifier +".csv";
 #elif UNITY_ANDROID
-        return Application.persistentDataPath+"Saved_data.csv";
+        return Application.persistentDataPath+"Saved_data" + SystemInfo.deviceUniqueIdentifier +".csv";
 #else
-        return Application.dataPath +"/"+"Saved_data.csv";
+        return Application.dataPath +"/"+"Saved_data" + SystemInfo.deviceUniqueIdentifier +".csv";
 #endif
     }
 }
