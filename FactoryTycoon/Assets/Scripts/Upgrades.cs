@@ -10,10 +10,10 @@ public class Upgrades : MonoBehaviour
     protected string itemUpgradeSection;
     protected Sprite image;
     protected float cost;
-    protected float economical;
     protected float environmental;
     protected float social;
     protected float productionQuantity;
+    protected int upgradeNumber = 1;
     public GameObject panel;
     public GameObject tileSprite;
     // Start is called before the first frame update

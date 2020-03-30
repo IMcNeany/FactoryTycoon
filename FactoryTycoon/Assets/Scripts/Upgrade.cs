@@ -50,7 +50,7 @@ public class Upgrade : Upgrades
             }
             else if(textBoxes[i].gameObject.name == "Description")
             {
-                textBoxes[i].SetText(description + "\n" + "Social: " + social +"\n" + "Economical: " + economical + "\n" + "Environmental: " + environmental);
+                textBoxes[i].SetText(description + "\n" + "Social: " + social + "\n" + "Environmental: " + environmental);
             }
 
         }
@@ -68,24 +68,67 @@ public class Upgrade : Upgrades
             if (buttons[i].gameObject.name == "Purchase")
             {
                 TextMeshProUGUI purchaseText = buttons[i].gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-                purchaseText.SetText("Purchase for £" + cost);
+                purchaseText.SetText("Purchase for £" + cost + "K");
             }
         }
 
+        TextMeshProUGUI[] predicted = copyPanel.transform.GetChild(2).transform.GetComponentsInChildren<TextMeshProUGUI>();
+
+        for (int i = 0; i < predicted.Length; i++)
+        {
+            if (predicted[i].name == "Stats")
+            {
+                predicted[i].SetText("Cash: £" + (gameManager.money - cost * upgradeNumber) + "K" + "\n" + "Social: " + (gameManager.social + (social * upgradeNumber)) + "\n" + "Environmental: " + (gameManager.environment + (environmental*upgradeNumber)) + "\n");
+            }
+
+        }
+        ButtonLink calcProductNo = copyPanel.transform.GetChild(0).transform.GetChild(5).GetComponent<ButtonLink>();
+        calcProductNo.GetupgradeLink(this);
     }
 
-    public void SetDesc(string upgradeName, string desc, float money, float itemSocial, float itemEco, float itemEnvironmental, GameObject tile, string SecName, float quantity, string altDesc)
+    public void SetDesc(string upgradeName, string desc, float money, float itemSocial, float itemEnvironmental, GameObject tile, string SecName, float quantity, string altDesc)
     {
         title = upgradeName;
         description = desc;
         altDescription = altDesc;
         cost = money;
         social = itemSocial;
-        economical = itemEco;
         environmental = itemEnvironmental;
         tileSprite = tile;
         itemUpgradeSection = SecName;
         productionQuantity = quantity;
+
+    }
+
+    public void Setnumber(int no)
+    {
+        upgradeNumber = no;
+        UpdateStats();
+    }
+
+    void UpdateStats()
+    {
+        TextMeshProUGUI[] predicted = copyPanel.transform.GetChild(2).transform.GetComponentsInChildren<TextMeshProUGUI>();
+
+        for (int i = 0; i < predicted.Length; i++)
+        {
+            if (predicted[i].name == "Stats")
+            {
+                predicted[i].SetText("Cash: £" + (gameManager.money - cost * upgradeNumber) + "K" + "\n" + "Social: " + (gameManager.social + (social * upgradeNumber)) + "\n" + "Environmental: " + (gameManager.environment + (environmental * upgradeNumber)) + "\n");
+            }
+
+        }
+
+        // Button[] buttons;
+        buttons = copyPanel.transform.GetChild(0).transform.GetComponentsInChildren<Button>();
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            if (buttons[i].gameObject.name == "Purchase")
+            {
+                TextMeshProUGUI purchaseText = buttons[i].gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+                purchaseText.SetText("Purchase for £" + (cost * upgradeNumber) + "K");
+            }
+        }
     }
 
     void CheckPurchaseCost()
@@ -107,7 +150,15 @@ public class Upgrade : Upgrades
             gameManager.checkUIRayCast = false;
         }
     }
+    public string GetItemSection()
+    {
+        return itemUpgradeSection;
+    }
 
+    public float GetCost()
+    {
+        return cost;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -120,16 +171,16 @@ public class Upgrade : Upgrades
         gameManager.checkRayCast = true;
 
         //pass all infor to active upgrades
-        ActiveUpgrade activeUpgrade = GameObject.FindObjectOfType<GameManager>().GetComponent<ActiveUpgrade>();
+        ActiveUpgrade activeUpgrade = FindObjectOfType<GameManager>().GetComponent<ActiveUpgrade>();
 
         activeUpgrade.title = title;
         activeUpgrade.itemSection = itemUpgradeSection;
-        activeUpgrade.itemEconomical = economical;
         activeUpgrade.itemEnvironmental = environmental;
         activeUpgrade.itemSocial = social;
         activeUpgrade.itemCost = cost;
         activeUpgrade.spriteToPlace = tileSprite;
         activeUpgrade.ProductionQuantity = productionQuantity;
+        activeUpgrade.number = upgradeNumber;
 
 
         gameManager.CloseUpgradeUI();

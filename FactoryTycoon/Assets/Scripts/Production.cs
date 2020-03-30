@@ -6,7 +6,7 @@ public class Production : MonoBehaviour
 {
     public GameObject waste;
     public GameObject rawMat;
-    public float wastePercent = 60.0f;
+    public float wastePercent;
     GenerateGrid grid;
     float totalRawMat = 0;
 
@@ -40,17 +40,18 @@ public class Production : MonoBehaviour
         productionTiles.Clear();
 
 
-        if (CountProductionAndWaste())
-        {
-            for (int i = 0; i < grid.GetHeight(); i++)
-            {
-                for (int j = 0; j < grid.GetWidth(); j++)
-                {
-                    GridTile tile = grid.GetGrid(i, j);
-                    if (tile.factorySection == "Storage")
-                    {
 
-                        if (CountRawMats(tile))
+        for (int i = 0; i < grid.GetHeight(); i++)
+        {
+            for (int j = 0; j < grid.GetWidth(); j++)
+            {
+                GridTile tile = grid.GetGrid(i, j);
+                if (tile.factorySection == "Storage")
+                {
+
+                    if (CountRawMats(tile))
+                    {
+                        if (CountProductionAndWaste())
                         {
                             tile.ResetTile();
 
@@ -60,20 +61,54 @@ public class Production : MonoBehaviour
 
                     }
 
-
                 }
-            }
 
-            UseProductionMachines();
-            UseDisposal();
-            CheckWasteStorage();
+
+            }
+        }
+
+            if (productionTiles.Count >= 1 && DisposalTiles.Count >=1 )
+            {
+                UseProductionMachines();
+                UseDisposal();
+                CheckWasteStorage();
+            }
+        CountProductionAndWaste();
+       if(productionTiles.Count ==0 && DisposalTiles.Count == 0)
+        {
+            if(FindObjectOfType<GameManager>().money < 700)
+            {
+                FindObjectOfType<GameManager>().GameOver(GameManager.GameOverCode.NoMoney);
+            }
+        }
+       else if(productionTiles.Count == 0)
+        {
+            if (FindObjectOfType<GameManager>().money < 300)
+            {
+                FindObjectOfType<GameManager>().GameOver(GameManager.GameOverCode.NoMoney);
+            }
+        }
+        else if (DisposalTiles.Count == 0)
+        {
+            if (FindObjectOfType<GameManager>().money < 400)
+            {
+                FindObjectOfType<GameManager>().GameOver(GameManager.GameOverCode.NoMoney);
+            }
+        }
+        else if(totalRawMat == 0 &&  FindObjectOfType<GameManager>().money < 50)
+        {
+            FindObjectOfType<GameManager>().GameOver(GameManager.GameOverCode.NoMoney);
         }
         IncreaseTurnCount();
 
 
     }
+
+
     bool CountProductionAndWaste()
     {
+        productionTiles.Clear();
+        DisposalTiles.Clear();
         for (int i = 0; i < grid.GetHeight(); i++)
         {
             for (int j = 0; j < grid.GetWidth(); j++)
@@ -260,11 +295,11 @@ public class Production : MonoBehaviour
         }
         float tiles = (float)WasteTiles.Count / (float)StorageTiles.Count;
 
-        if ((tiles* 100)>= wastePercent)
+        if ((tiles * 100)>= FindObjectOfType<Goal>().waste)
         {
             Debug.Log("Game over");
             GameManager gameManager = FindObjectOfType<GameManager>();
-            gameManager.GameOver();
+            gameManager.GameOver(GameManager.GameOverCode.Waste);
         }
     }
 }

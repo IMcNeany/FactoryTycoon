@@ -61,7 +61,7 @@ public class Tutorial : MonoBehaviour
         instance.transform.localScale = new Vector3(1, 1, 1);
         instance.transform.localPosition = new Vector3(0, 0, -1);
 
-        FindObjectOfType<GameManager>().UpdateMoney(-900);
+      //  FindObjectOfType<GameManager>().UpdateMoney(-300);
     }
      void TurnOffPanels()
     {

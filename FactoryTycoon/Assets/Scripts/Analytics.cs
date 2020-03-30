@@ -12,7 +12,6 @@ public class Analytics : MonoBehaviour
     bool lose = false;
     float social = -10;
     float environmental = -10;
-    float economical = -10;
     float money = -10;
     int moreinfoClicked = 0;
     float timer = 0;
@@ -52,9 +51,8 @@ public class Analytics : MonoBehaviour
         headerRow[5] = "Difficulty Level";
         headerRow[6] = "Social Stat";
         headerRow[7] = "Environmental Stat";
-        headerRow[8] = "Economical Stat";
-        headerRow[9] = "Money";
-        headerRow[10] = "More Info Button Clicked";
+        headerRow[8] = "Money";
+        headerRow[9] = "More Info Button Clicked";
         saveData.Add(headerRow);
 
         CreateDataFile();
@@ -115,9 +113,8 @@ public class Analytics : MonoBehaviour
             data[5] = difficultyLevel;
             data[6] = social.ToString();
             data[7] = environmental.ToString();
-            data[8] = economical.ToString();
-            data[9] = money.ToString();
-            data[10] = moreinfoClicked.ToString();
+            data[8] = money.ToString();
+            data[9] = moreinfoClicked.ToString();
             saveData.Add(data);
 
             string[][] output = new string[saveData.Count][];
@@ -145,8 +142,9 @@ public class Analytics : MonoBehaviour
             outStream.Close();
 
             FindObjectOfType<UploadFile>().AttemptUpload();
-            statsSaved = true;
+            
         }
+        statsSaved = true;
     }
 
     public void MoreInfoButtonClicked()
@@ -159,7 +157,6 @@ public class Analytics : MonoBehaviour
       
         social = gameManager.social;
         environmental = gameManager.environment;
-        economical = gameManager.economic;
         money = gameManager.money;
         gameComplete = gameManager.completedLevel;
         lose = gameManager.lose;

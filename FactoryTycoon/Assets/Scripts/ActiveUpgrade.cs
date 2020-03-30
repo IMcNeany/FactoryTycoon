@@ -8,10 +8,10 @@ public class ActiveUpgrade : MonoBehaviour
     public string title;
     public string itemSection;
     public float itemSocial;
-    public float itemEconomical;
     public float itemEnvironmental;
     public float itemCost;
     public float ProductionQuantity;
+    public int number;
     public GameObject spriteToPlace = null;
 
   

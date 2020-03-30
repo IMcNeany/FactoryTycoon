@@ -96,8 +96,8 @@ MonoBehaviour:
   title: Landfill
   itemSection: Disposal
   itemSocial: 0
-  itemEconomical: 0
   itemEnvironmental: 0
   itemCost: 0
-  ProductionQuantity: 100
+  ProductionQuantity: 80
+  number: 0
   spriteToPlace: {fileID: 3385910217501581760}

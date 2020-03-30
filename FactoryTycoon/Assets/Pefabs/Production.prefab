@@ -96,8 +96,8 @@ MonoBehaviour:
   title: 3D Printing
   itemSection: Production
   itemSocial: 0
-  itemEconomical: 0
   itemEnvironmental: 0
   itemCost: 0
-  ProductionQuantity: 100
+  ProductionQuantity: 250
+  number: 0
   spriteToPlace: {fileID: 1938646889730943514}

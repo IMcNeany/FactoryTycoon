@@ -29,7 +29,9 @@ public class TestUpgrade : Upgrade
     {
 
         Upgrade parentUpgrade = this.gameObject.GetComponent<Upgrade>();
-        parentUpgrade.SetDesc(itemTitle, itemDesc, itemCost, itemSocial, itemEconomic, itemEnvironmental, sprite, SectionName, productionQuant, altDesc);
+        parentUpgrade.SetDesc(itemTitle, itemDesc, itemCost, itemSocial, itemEnvironmental, sprite, SectionName, productionQuant, altDesc);
+
+        this.gameObject.transform.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>().SetText("£" + itemCost + "K");
     }
 
 

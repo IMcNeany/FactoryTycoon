@@ -7,12 +7,23 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
+    public enum GameOverCode
+    {
+        Waste = 0,
+        NoTurn = 1,
+        GotTarMoney =2,
+        FailTarEco =3,
+        FailTarSocial = 4,
+        FailSocEco = 5,
+        CompTurn = 6,
+        NoMoney = 7
+    }
 
     public float environment = 0;
-    public float economic = 0;
     public float social = 0;
+    public float startingCost;
     public float money = 1000;
+    public float profit = 0;
     public bool tutorialActive = false;
     public bool completedLevel = false;
     public bool win = false;
@@ -36,17 +47,20 @@ public class GameManager : MonoBehaviour
     public GameObject tutorial;
 
     public TextMeshProUGUI cash;
+    public TextMeshProUGUI profitText;
     public TextMeshProUGUI socialText;
-    public TextMeshProUGUI economicText;
     public TextMeshProUGUI environmentText;
 
     public TextMeshProUGUI Goals;
     public TextMeshProUGUI turnsLeft;
 
+    public TextMeshProUGUI setFirstGoalText;
+    public GameObject StartText;
 
     public GameObject gameOverScreen;
     public TextMeshProUGUI winOrLose;
     public TextMeshProUGUI StatsText;
+    public TextMeshProUGUI explanationText;
     public AudioClip winner;
     public AudioClip loser;
     public AudioSource gameoverAudio;
@@ -55,12 +69,14 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         gameOverScreen.SetActive(false);
-       
-        cash.SetText(" £" + money);
+        StartText.SetActive(true);
+        startingCost = money;
+        cash.SetText(" £" + money + "K");
         SetObjectives();
         CalculateTurn();
         tutorialActive = FindObjectOfType<Goal>().GetTutorial();
         difficultyLevel = FindObjectOfType<Goal>().GetDifficulty();
+        
         if (tutorialActive)
         {
             //  FindObjectOfType<Tutorial>().gameObject.SetActive(true);
@@ -90,7 +106,25 @@ public class GameManager : MonoBehaviour
     public void UpdateMoney(float cashSum)
     {
         money += cashSum;
-        cash.SetText(" £" + money);
+        cash.SetText(" £" + money + "K");
+        UpdateProfit();
+    }
+
+    void UpdateProfit()
+    {
+        profit = startingCost - money;
+        if(profit < 0)
+        {
+           profit =  Mathf.Abs(profit);
+            profitText.SetText("<color=green> £" + profit + "K </color>");
+        }
+        else
+        {
+         
+            profitText.SetText("<color=red> -£" + profit + "K </color>");
+             profit = (-profit);
+        }
+
     }
 
     public void UpdateSocial(float itemsocial)
@@ -98,12 +132,7 @@ public class GameManager : MonoBehaviour
         social += itemsocial;
 
     }
-    public void UpdateEconomic(float itemEconomical)
-    {
-        economic += itemEconomical;
 
-
-    }
     public void UpdateEnvironmental(float itemsEnvironmental)
     {
         environment += itemsEnvironmental;
@@ -121,7 +150,7 @@ public class GameManager : MonoBehaviour
 
         //deciding between the bars and having the text at the top one will be removed
         socialText.SetText(social.ToString());
-        economicText.SetText(economic.ToString());
+      
         environmentText.SetText(environment.ToString());
 
     }
@@ -150,6 +179,7 @@ public class GameManager : MonoBehaviour
 
  
        Goals.SetText(goalSetter.goalText);
+       setFirstGoalText.SetText(goalSetter.goalText + " and keep the waste below " + goalSetter.waste + "% of the storage capacity.");
     }
 
     public void MoreInfoClicked()
@@ -196,7 +226,7 @@ public class GameManager : MonoBehaviour
                 {
                     completedLevel = true;
                    
-                    GameOver();
+                    GameOver( GameOverCode.NoTurn);
                 }
             }
         }
@@ -206,35 +236,94 @@ public class GameManager : MonoBehaviour
         }
   }
 
-    public void GameOver()
+    public void GameOver(GameOverCode code)
     {
-      
+        CheckReason(code);
         lose = true;
         Analytics analytics = FindObjectOfType<Analytics>();
         analytics.SaveStats();
         winOrLose.SetText("You lost..");
 
-        StatsText.SetText("You made £" + money + " in " + turn + " turns's. You achieved a social rating of " + social + ", an economic rating of " + economic + " and an environmental rating of " + environment + ".");
+
+        StatsText.SetText("You made £" + profit + "K in " + turn + " turns's. You achieved a social rating of " + social + " and an environmental rating of " + environment + ".");
+      //  gameoverAudio.PlayOneShot(loser);
         gameoverAudio.clip = loser;
         gameOverScreen.SetActive(true);
     }
 
-    public void Win()
+    public void Win(GameOverCode code)
     {
+        CheckReason(code);
         completedLevel = true;
         win = true;
         Analytics analytics = FindObjectOfType<Analytics>();
         analytics.SaveStats();
         winOrLose.SetText("You Won!");
-        StatsText.SetText("You made £" + money + " in " + turn + " turns's. You achieved a social rating of " + social + ", an economic rating of " + economic + " and an environmental rating of " + environment + ".");
+        StatsText.SetText("You made £" + profit + "K in " + turn + " turns's. You achieved a social rating of " + social + " and an environmental rating of " + environment + ".");
         // winScreen.SetActive(true);
         gameoverAudio.clip = winner;
         gameOverScreen.SetActive(true);
 
     }
 
+    void CheckReason(GameOverCode code)
+    {
+        switch ((int)code)
+        {
+        //      Waste = 0,
+        //NoTurn = 1,
+        //GotTarMoney = 2,
+        //FailTarEco = 3,
+        //FailTarSocial = 4,
+        //FailSocEco = 5,
+        //CompTurn = 6
+            case 0:
+                {
+                    explanationText.SetText("You filled up too much storage with waste! Try and use more environmentally friendly disposal methods.");
+                }
+                break;
+            case 1:
+                {
+                    explanationText.SetText("You didn't meet the target with in the number of turns!");
+                }
+                break;
+            case 2:
+                {
+                    explanationText.SetText("You reached the Target amount of money!");
+                }
+               
+                break;
+            case 3:
+                {
+                    explanationText.SetText("You created too much pollution! Try and choose more environmentally friendly options.");
+                }
+                break;
+            case 4:
+                {
+                    explanationText.SetText("You failed to keep up the relationship with those around you. Try to choose options that the community around favours.");
+                }
+                break;
+            case 5:
+                {
+                    explanationText.SetText("You failed to keep up social and environmental expectations! Keep an eye on those levels next time.");
+                }
+                break;
+            case 6:
+                {
+                    explanationText.SetText("You reached the goal within the number of turns!");
+                }
+                break;
+            case 7:
+                {
+                    explanationText.SetText("You ran out of money! You couldn't keep up with factory costs.");
+                }
+                break;
+        }
+    }
+
     public void LoadMainMenu()
     {
 
         SceneManager.LoadScene(0);
+        Destroy(FindObjectOfType<Goal>().gameObject);
     }}

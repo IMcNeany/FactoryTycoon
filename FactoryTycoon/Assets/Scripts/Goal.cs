@@ -5,13 +5,13 @@ using UnityEngine;
 public class Goal : MonoBehaviour
 {
     float TargetSocial;
-    float TargetEconomical;
     float TargetEnvironmental;
     float Targetmoney;
     int totalTurns = -2;
     Difficulty currentDifficulty;
     public string goalText;
-    public bool tutorial = true;
+    public float waste = 60;
+    public bool tutorial = false;
 
     public enum Difficulty
     {
@@ -24,7 +24,8 @@ public class Goal : MonoBehaviour
     // Start is called before the first frame update
     void start()
     {
-       
+        //  Debug.Log(tutorial);
+        tutorial = false;
         SetGoal(0);
     }
     private void Awake()
@@ -46,9 +47,9 @@ public class Goal : MonoBehaviour
             case 0:
                 {
                    
-                   if(gameManager.money >= Targetmoney)
+                   if(gameManager.profit >= Targetmoney)
                     {
-                        gameManager.Win();
+                        gameManager.Win(GameManager.GameOverCode.GotTarMoney);
                     }
                 }
                 break;
@@ -56,11 +57,11 @@ public class Goal : MonoBehaviour
                 {
                    if(gameManager.environment < TargetEnvironmental)
                     {
-                        gameManager.GameOver();
+                        gameManager.GameOver(GameManager.GameOverCode.FailTarEco);
                     }
-                   else if(gameManager.money >= Targetmoney)
+                   else if(gameManager.profit >= Targetmoney)
                     {
-                        gameManager.Win();
+                        gameManager.Win(GameManager.GameOverCode.GotTarMoney);
                     }
                 }
                 break;
@@ -68,40 +69,42 @@ public class Goal : MonoBehaviour
                 {
                     if(gameManager.social < TargetSocial)
                     {
-                        gameManager.GameOver();
+                        gameManager.GameOver(GameManager.GameOverCode.FailTarSocial);
                     }
-                    else if(gameManager.GetTurn() >= totalTurns)
+                    else if(gameManager.GetTurn() <= totalTurns)
                     {
-                        gameManager.Win();
+                        gameManager.Win(GameManager.GameOverCode.CompTurn);
                     }
                 }
                 break;
             case 3:
                 {
-                    if (gameManager.social < TargetSocial ||  gameManager.environment < TargetEnvironmental)
+                    if (gameManager.social < TargetSocial &&  gameManager.environment < TargetEnvironmental)
                     {
-                        gameManager.GameOver();
+                        gameManager.GameOver(GameManager.GameOverCode.FailSocEco);
                     }
-                    else if(gameManager.GetTurn() >= totalTurns)
+                    else if(gameManager.social < TargetSocial)
                     {
-                        gameManager.Win();
+                        gameManager.GameOver(GameManager.GameOverCode.FailTarSocial);
+                    }
+                    else if(gameManager.environment < TargetEnvironmental)
+                    {
+                        gameManager.GameOver(GameManager.GameOverCode.FailTarEco);
+                    }
+                    else if(gameManager.GetTurn() <= totalTurns)
+                    {
+                        gameManager.Win(GameManager.GameOverCode.CompTurn);
                     }
                 }
                 break;
             case 4:
                 {
-                    if (gameManager.social < TargetSocial || gameManager.economic < TargetEconomical || gameManager.environment < TargetEnvironmental)
+                    
+                    if(gameManager.profit >= Targetmoney)
                     {
-                        gameManager.GameOver();
+                        gameManager.Win(GameManager.GameOverCode.GotTarMoney);
                     }
-                    else if(gameManager.GetTurn() >= 20 && gameManager.money >= Targetmoney)
-                    {
-                        gameManager.Win();
-                    }
-                    else if(gameManager.GetTurn() > 20)
-                    {
-                        gameManager.GameOver();
-                    }
+                  
                 }
                 break;
         }
@@ -156,12 +159,10 @@ public class Goal : MonoBehaviour
                 break;
             case 4:
                 {
-                    goalText = "Be a perfect buisness, Keep all three pillars above 0 for 20 turns while making a profit of over 3000";
-                    totalTurns = 20;
-                    TargetSocial = 0;
-                    TargetEconomical = 0;
-                    TargetEnvironmental = 0;
-                    Targetmoney = 3000;
+                    tutorial = true;
+                    goalText = "Make £200k Profit";
+                 
+                    Targetmoney = 200;
                     break;
                 }
         }
