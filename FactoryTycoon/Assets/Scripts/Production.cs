@@ -11,6 +11,7 @@ public class Production : MonoBehaviour
     float totalRawMat = 0;
 
 
+    List<GridTile> rawMats;
     List<GridTile> productionTiles;
     List<GridTile> DisposalTiles;
     List<GridTile> StorageTiles;
@@ -22,6 +23,7 @@ public class Production : MonoBehaviour
         DisposalTiles = new List<GridTile>();
         StorageTiles = new List<GridTile>();
         WasteTiles = new List<GridTile>();
+        rawMats = new List<GridTile>();
         grid = FindObjectOfType<GenerateGrid>();
     }
 
@@ -38,6 +40,7 @@ public class Production : MonoBehaviour
         totalRawMat = 0;
         DisposalTiles.Clear();
         productionTiles.Clear();
+        rawMats.Clear();
 
 
 
@@ -49,17 +52,19 @@ public class Production : MonoBehaviour
                 if (tile.factorySection == "Storage")
                 {
 
-                    if (CountRawMats(tile))
-                    {
+                    
                         if (CountProductionAndWaste())
                         {
-                            tile.ResetTile();
+                        if (tile.UpgradeSection == "RawMaterial")
+                        {
+                            rawMats.Add(tile);
+                            // tile.ResetTile();
 
-                            Debug.Log(tile.gameObject.transform.GetChild(0).name);
-                            Destroy(tile.gameObject.transform.GetChild(0).gameObject);
+                            //  Debug.Log(tile.gameObject.transform.GetChild(0).name);
+                            //   Destroy(tile.gameObject.transform.GetChild(0).gameObject);
+                        }
                         }
 
-                    }
 
                 }
 
@@ -160,17 +165,34 @@ public class Production : MonoBehaviour
 
     void UseProductionMachines()
     {
+        totalRawMat = rawMats.Count;
         int perMachine = Mathf.FloorToInt( totalRawMat / productionTiles.Count) ;
         int remainder = (int)totalRawMat % (int)productionTiles.Count;
         Debug.Log(perMachine + "total " + totalRawMat + " " + productionTiles.Count + " " + remainder);
         float totalSales = 0;
+
+        GameManager gm = FindObjectOfType<GameManager>();
+
         for (int i = 0; i < productionTiles.Count; i++)
         {
-           totalSales += productionTiles[i].itemQuantity * perMachine;
+            for(int j =0; j < perMachine; j++)
+            {
+                totalSales += rawMats[0].itemQuantity + gm.sellPrice;
+                
+                rawMats[0].ResetTile();
+                Destroy(rawMats[0].gameObject.transform.GetChild(0).gameObject);
+                rawMats.RemoveAt(0);
+                // totalSales += productionTiles[i].itemQuantity * perMachine;
+            }
         }
         if(remainder == 1)
         {
-            totalSales += productionTiles[0].itemQuantity * remainder;
+            totalSales += rawMats[0].itemQuantity + gm.sellPrice;
+            
+            rawMats[0].ResetTile();
+            Destroy(rawMats[0].gameObject.transform.GetChild(0).gameObject);
+            rawMats.RemoveAt(0);
+            //totalSales += productionTiles[0].itemQuantity * remainder;
         }
         GameManager gameManager = FindObjectOfType<GameManager>();
         gameManager.UpdateMoney(totalSales);

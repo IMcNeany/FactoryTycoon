@@ -7,12 +7,14 @@ public class MainMenu : MonoBehaviour
     public GameObject playCanvas;
     public GameObject difficultyCanvas;
     public GameObject consentCanvas;
+    public GameObject scenario;
     // Start is called before the first frame update
     void Start()
     {
         difficultyCanvas.SetActive(false);
         playCanvas.SetActive(true);
         consentCanvas.SetActive(false);
+        scenario.SetActive(false);
     }
 
 
@@ -30,6 +32,7 @@ public class MainMenu : MonoBehaviour
         difficultyCanvas.SetActive(true);
         playCanvas.SetActive(false);
         consentCanvas.SetActive(false);
+        scenario.SetActive(false);
     }
 
     public void OpenConsent()
@@ -37,11 +40,21 @@ public class MainMenu : MonoBehaviour
         difficultyCanvas.SetActive(false);
         playCanvas.SetActive(false);
         consentCanvas.SetActive(true);
+        scenario.SetActive(false);
+    }
+
+    public void OpenScenario(int diffNo)
+    {
+        difficultyCanvas.SetActive(false);
+        playCanvas.SetActive(false);
+        consentCanvas.SetActive(false);
+        scenario.SetActive(true);
+        FindObjectOfType<Goal>().SetGoal(diffNo);
     }
 
     public void LoadScene(int diffNo)
     {
-        FindObjectOfType<Goal>().SetGoal(diffNo);
+        FindObjectOfType<Goal>().SetScenario(diffNo);
         FindObjectOfType<SceneSwitcher>().SwitchScene(1);
 
     }

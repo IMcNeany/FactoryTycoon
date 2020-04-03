@@ -21,13 +21,14 @@ public class GameManager : MonoBehaviour
 
     public float environment = 0;
     public float social = 0;
-    public float startingCost;
+    public float startingCost = 1000;
     public float money = 1000;
     public float profit = 0;
     public bool tutorialActive = false;
     public bool completedLevel = false;
     public bool win = false;
     public bool lose = false;
+    public float wasteCount = 60;
     int turn = 0;
     public int moreInfoEngagement = 0;
     public string difficultyLevel = null;
@@ -37,6 +38,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject wasteSelling;
     public Button wasteClose;
+
+    public GameObject Selling;
+    public Button closeSell;
 
 
     public GameObject uiUpgrades;
@@ -68,9 +72,13 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Goal goal = FindObjectOfType<Goal>();
         gameOverScreen.SetActive(false);
         StartText.SetActive(true);
-        startingCost = money;
+        sellPrice = goal.baseSell;
+        wasteCount = goal.waste;
+        money = goal.startCash;
+        startingCost = goal.startCash;
         cash.SetText(" £" + money + "K");
         SetObjectives();
         CalculateTurn();
@@ -210,6 +218,14 @@ public class GameManager : MonoBehaviour
             wasteClose.interactable = false;
         }
         wasteSelling.SetActive(true);
+    }
+
+    public void OpenSelling()
+    {
+     
+        closeSell.interactable = true;
+       
+        Selling.SetActive(true);
     }
 
     void CalculateTurn()

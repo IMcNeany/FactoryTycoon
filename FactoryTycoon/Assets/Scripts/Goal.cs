@@ -11,6 +11,8 @@ public class Goal : MonoBehaviour
     Difficulty currentDifficulty;
     public string goalText;
     public float waste = 60;
+    public float startCash = 1000;
+    public float baseSell = 150;
     public bool tutorial = false;
 
     public enum Difficulty
@@ -20,6 +22,13 @@ public class Goal : MonoBehaviour
         hard,
         recession,
         thrifty
+    }
+
+    public enum Scenario
+    {
+        normal,
+        thrifty,
+        recession
     }
     // Start is called before the first frame update
     void start()
@@ -170,6 +179,45 @@ public class Goal : MonoBehaviour
         
     }
 
+    public void SetScenario(int scenario)
+    {
+        switch (scenario)
+        {
+            case 0:
+                {
+                    waste = 60;
+                    startCash = 1500;
+                    baseSell = 250;
+                }
+                break;
+            case 1:
+                {
+                    waste = 50;
+                    startCash = 1000;
+                    baseSell = 150;
+                }
+                break;
+            case 2:
+                {
+                    waste = 50;
+                    startCash = 1000;
+                    baseSell = 100;
+                }
+                break;
+            case 3:
+                {
+
+                    waste = 60;
+                    startCash = 1500;
+                    baseSell = 150;
+                    tutorial = true;
+                    goalText = "Make £200k Profit";
+
+                    Targetmoney = 200;
+                }
+                break;
+        }
+    }
     public void ToggleTutorial()
     {
         if(tutorial)

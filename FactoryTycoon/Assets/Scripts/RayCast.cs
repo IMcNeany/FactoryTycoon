@@ -8,6 +8,7 @@ public class RayCast : MonoBehaviour
     public GameManager gameManager;
     public ActiveUpgrade activeUpgrade;
     GridTile CurrentWasteGameTile = null;
+    GridTile CurrentSellingGameTile = null;
     GenerateGrid grid;
 
     // Start is called before the first frame update
@@ -67,6 +68,11 @@ public class RayCast : MonoBehaviour
                 CurrentWasteGameTile = gridTile;
 
              }
+             else if (gridTile.occupied == true && gridTile.UpgradeSection == "Production" || gridTile.occupied == true && gridTile.UpgradeSection == "Disposal")
+            {
+                gameManager.OpenSelling();
+                CurrentSellingGameTile = gridTile;
+            }
             else if (activeUpgrade.itemSection == "RawMaterial")
             {
                 if (gridTile.factorySection == "Storage" && gridTile.occupied != true && activeUpgrade.spriteToPlace != null)
@@ -86,6 +92,17 @@ public class RayCast : MonoBehaviour
 
             
         }
+    }
+
+    public void SellMachine()
+    {
+        CurrentSellingGameTile.occupied = false;
+        CurrentSellingGameTile.tileUpgradeName = "";
+        CurrentSellingGameTile.UpgradeSection = "";
+        CurrentSellingGameTile.itemQuantity = 0;
+        activeUpgrade.spriteToPlace = null;
+        Destroy(CurrentSellingGameTile.transform.GetChild(0).gameObject);
+        gameManager.UpdateMoney(200);
     }
 
     public void SellWaste()
