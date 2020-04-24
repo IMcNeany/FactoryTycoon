@@ -272,7 +272,7 @@ ScriptsOnlyBuild:
     className: TMP_ScrollbarEventHandler
   - hash:
       serializedVersion: 2
-      Hash: fce0d2f06e8175679225e368e24740ff
+      Hash: 2e0c2c13a2ece7300ed20d6490b904b8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -446,7 +446,7 @@ ScriptsOnlyBuild:
     className: Shadow
   - hash:
       serializedVersion: 2
-      Hash: 331c5c93fc38756eecacc68198bd2c50
+      Hash: 5814d6eca52d36898132fd58fa7f647b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Goal
@@ -554,7 +554,7 @@ ScriptsOnlyBuild:
     className: TMP_SpriteAnimator
   - hash:
       serializedVersion: 2
-      Hash: 1a28dc72ccecf232e1a465318340ae36
+      Hash: 779d764ecea619602e62a171fc93b66f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MainMenu

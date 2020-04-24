@@ -55,11 +55,15 @@ public class Goal : MonoBehaviour
         {
             case 0:
                 {
-                   
-                   if(gameManager.profit >= Targetmoney)
+                    if (gameManager.environment < TargetEnvironmental)
+                    {
+                        gameManager.GameOver(GameManager.GameOverCode.FailTarEco);
+                    }
+                    else if (gameManager.profit >= Targetmoney)
                     {
                         gameManager.Win(GameManager.GameOverCode.GotTarMoney);
                     }
+                  
                 }
                 break;
             case 1:
@@ -80,7 +84,7 @@ public class Goal : MonoBehaviour
                     {
                         gameManager.GameOver(GameManager.GameOverCode.FailTarSocial);
                     }
-                    else if(gameManager.GetTurn() <= totalTurns)
+                    else if(gameManager.GetTurn() == totalTurns)
                     {
                         gameManager.Win(GameManager.GameOverCode.CompTurn);
                     }
@@ -100,7 +104,7 @@ public class Goal : MonoBehaviour
                     {
                         gameManager.GameOver(GameManager.GameOverCode.FailTarEco);
                     }
-                    else if(gameManager.GetTurn() <= totalTurns)
+                    else if(gameManager.GetTurn() == totalTurns)
                     {
                         gameManager.Win(GameManager.GameOverCode.CompTurn);
                     }
@@ -138,14 +142,15 @@ public class Goal : MonoBehaviour
         {
             case 0:
                 {
-                    goalText = "Make £500 profit";
+                    goalText = "Make £1000K profit while keeping the environmental pillar above -10";
                     //totalTurns = 5;
-                    Targetmoney = 500;
+                    TargetEnvironmental = -10;
+                    Targetmoney = 1000;
                 }
                 break;
             case 1:
                 {
-                    goalText = "Make £1000 profit while keeping the environmental pillar above -5";
+                    goalText = "Make £1000K profit while keeping the environmental pillar above -5";
                     // totalTurns = 15;
                     TargetEnvironmental = -5;
                     Targetmoney = 1000;
@@ -169,9 +174,9 @@ public class Goal : MonoBehaviour
             case 4:
                 {
                     tutorial = true;
-                    goalText = "Make £200k Profit";
+                    goalText = "Make £400k Profit";
                  
-                    Targetmoney = 200;
+                    Targetmoney = 400;
                     break;
                 }
         }
@@ -187,19 +192,19 @@ public class Goal : MonoBehaviour
                 {
                     waste = 60;
                     startCash = 1500;
-                    baseSell = 250;
+                    baseSell = 200;
                 }
                 break;
             case 1:
                 {
                     waste = 50;
-                    startCash = 1000;
-                    baseSell = 150;
+                    startCash = 1100;
+                    baseSell = 120;
                 }
                 break;
             case 2:
                 {
-                    waste = 50;
+                    waste = 40;
                     startCash = 1000;
                     baseSell = 100;
                 }
@@ -211,9 +216,9 @@ public class Goal : MonoBehaviour
                     startCash = 1500;
                     baseSell = 150;
                     tutorial = true;
-                    goalText = "Make £200k Profit";
+                    goalText = "Make £400k Profit";
 
-                    Targetmoney = 200;
+                    Targetmoney = 400;
                 }
                 break;
         }

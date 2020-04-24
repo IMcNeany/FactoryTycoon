@@ -98,6 +98,6 @@ MonoBehaviour:
   itemSocial: 0
   itemEnvironmental: 0
   itemCost: 0
-  ProductionQuantity: 250
+  ProductionQuantity: 0
   number: 0
   spriteToPlace: {fileID: 1938646889730943514}

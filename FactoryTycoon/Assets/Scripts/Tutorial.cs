@@ -42,7 +42,7 @@ public class Tutorial : MonoBehaviour
         //production
         GridTile gridTile = FindEmpty();
         gridTile.occupied = true;
-        gridTile.itemQuantity = 80;
+        gridTile.itemQuantity = 0;
         //gridTile.tileUpgradeName = "RawMaterial";
         gridTile.UpgradeSection = production.GetComponent<ActiveUpgrade>().itemSection;
         // gridTile.transform.position;
@@ -53,7 +53,7 @@ public class Tutorial : MonoBehaviour
         //disposal
          gridTile = FindEmpty();
         gridTile.occupied = true;
-        gridTile.itemQuantity = 1;
+        gridTile.itemQuantity = 50;
         //gridTile.tileUpgradeName = "RawMaterial";
         gridTile.UpgradeSection = Disposal.GetComponent<ActiveUpgrade>().itemSection;
         // gridTile.transform.position;
