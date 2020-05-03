@@ -11,10 +11,7 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        difficultyCanvas.SetActive(false);
-        playCanvas.SetActive(true);
-        consentCanvas.SetActive(false);
-        scenario.SetActive(false);
+        MainMenus();
     }
 
 
@@ -25,6 +22,13 @@ public class MainMenu : MonoBehaviour
         {
             Application.Quit();
         }
+    }
+    public void MainMenus()
+    {
+        difficultyCanvas.SetActive(false);
+        playCanvas.SetActive(true);
+        consentCanvas.SetActive(false);
+        scenario.SetActive(false);
     }
 
     public void OpenDifficulty()
@@ -37,10 +41,21 @@ public class MainMenu : MonoBehaviour
 
     public void OpenConsent()
     {
+#if UNITY_WEBGL
+        if (!difficultyCanvas.activeSelf)
+        {
+            OpenDifficulty();
+        }
+        else
+        {
+            MainMenus();
+        }
+#else
         difficultyCanvas.SetActive(false);
         playCanvas.SetActive(false);
         consentCanvas.SetActive(true);
         scenario.SetActive(false);
+#endif
     }
 
     public void OpenScenario(int diffNo)

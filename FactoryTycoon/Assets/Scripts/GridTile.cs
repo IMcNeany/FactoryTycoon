@@ -40,7 +40,7 @@ public class GridTile : MonoBehaviour
     {
         if(factorySection == "Storage")
         {
-            gameObject.GetComponent<SpriteRenderer>().color = new Color(0.7305146f, 0.6032253f, 0.430728f);
+           // gameObject.GetComponent<SpriteRenderer>().color = new Color(0.7305146f, 0.6032253f, 0.430728f);
             occupied = false;
         }
     }

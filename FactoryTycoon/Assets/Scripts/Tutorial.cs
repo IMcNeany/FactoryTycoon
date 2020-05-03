@@ -47,7 +47,7 @@ public class Tutorial : MonoBehaviour
         gridTile.UpgradeSection = production.GetComponent<ActiveUpgrade>().itemSection;
         // gridTile.transform.position;
        GameObject instance =  Instantiate(production.GetComponent<ActiveUpgrade>().spriteToPlace, gridTile.transform);
-        instance.transform.localScale = new Vector3(1, 1, 1);
+        instance.transform.localScale = new Vector3(0.08f, 0.08f, 1);
         instance.transform.localPosition = new Vector3(0, 0, -1);
 
         //disposal
@@ -58,7 +58,7 @@ public class Tutorial : MonoBehaviour
         gridTile.UpgradeSection = Disposal.GetComponent<ActiveUpgrade>().itemSection;
         // gridTile.transform.position;
          instance = Instantiate(Disposal.GetComponent<ActiveUpgrade>().spriteToPlace, gridTile.transform);
-        instance.transform.localScale = new Vector3(1, 1, 1);
+        instance.transform.localScale = new Vector3(0.08f, 0.08f, 1);
         instance.transform.localPosition = new Vector3(0, 0, -1);
 
       //  FindObjectOfType<GameManager>().UpdateMoney(-300);

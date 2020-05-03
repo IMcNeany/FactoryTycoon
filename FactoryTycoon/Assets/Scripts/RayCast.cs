@@ -121,7 +121,7 @@ public class RayCast : MonoBehaviour
 
         GameObject machine = Instantiate(activeUpgrade.spriteToPlace, gridTile.transform);
         machine.transform.position = new Vector3(gridTile.transform.position.x, gridTile.transform.position.y, -1);
-        machine.transform.localScale = new Vector3(1, 1, 1);
+        machine.transform.localScale = new Vector3(0.08f, 0.08f, 1);
         gridTile.occupied = true;
        
         gridTile.tileUpgradeName = activeUpgrade.title;
@@ -139,7 +139,7 @@ public class RayCast : MonoBehaviour
                 GridTile tile = FindTile();
                 machine = Instantiate(activeUpgrade.spriteToPlace, tile.transform);
                 machine.transform.position = new Vector3(tile.transform.position.x, tile.transform.position.y, -1);
-                machine.transform.localScale = new Vector3(1, 1, 1);
+                machine.transform.localScale = new Vector3(0.08f, 0.08f, 1);
                 tile.occupied = true;
 
                 tile.tileUpgradeName = activeUpgrade.title;

@@ -32,8 +32,10 @@ public class Upgrade : Upgrades
         copyPanel.transform.localScale = Vector3.one;
         copyPanel.transform.localPosition = Vector3.zero;
         RectTransform panelRect = copyPanel.GetComponent<RectTransform>();
-        panelRect.offsetMax = Vector3.zero;
+        panelRect.offsetMax = new Vector3(0.0f, -20.0f, 0.0f);
+
         panelRect.offsetMin = Vector3.zero;
+      
         copyPanel.SetActive(false);
     }
 
@@ -50,7 +52,16 @@ public class Upgrade : Upgrades
             }
             else if(textBoxes[i].gameObject.name == "Description")
             {
-                textBoxes[i].SetText(description + "\n" + "Social: " + social + "\n" + "Environmental: " + environmental);
+                if (itemUpgradeSection == "Production")
+                {
+
+                    textBoxes[i].SetText(description + "\n" + "Social: " + social + "\n" + "Environmental: " + environmental + "\n" + "Recycling Percent: " + productionQuantity + "%");
+                }
+                else
+                {
+                    textBoxes[i].SetText(description + "\n" + "Social: " + social + "\n" + "Environmental: " + environmental);
+                }
+               
             }
 
         }

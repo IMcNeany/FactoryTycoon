@@ -19,8 +19,11 @@ public class AudioController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetSliders();
-        ApplySound();
+        if (masterSlider != null)
+        {
+            SetSliders();
+        }
+            ApplySound();
     }
 
     // Update is called once per frame

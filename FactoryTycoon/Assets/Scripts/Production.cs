@@ -10,6 +10,7 @@ public class Production : MonoBehaviour
     GenerateGrid grid;
     float totalRawMat = 0;
     public GameObject smokeEffect;
+    public AudioSource machineSound;
 
 
     List<GridTile> rawMats;
@@ -362,6 +363,7 @@ public class Production : MonoBehaviour
                 lerpYIN = true;
 
                 //animation plays here
+                machineSound.Play();
                 StartCoroutine(AnimateMachineX(productionTiles[machineNo]));
                 StartCoroutine(AnimateMachineX(DisposalTiles[disposalMachine]));
                 StartCoroutine(AnimateMachineY(DisposalTiles[disposalMachine]));
@@ -472,9 +474,9 @@ public class Production : MonoBehaviour
 
                
                 t = 1f - Mathf.Cos(t * Mathf.PI * 0.5f);
-                float lerpy = Mathf.Lerp(1, 0.8f, t);
+                float lerpy = Mathf.Lerp(0.08f, 0.06f, t);
                 machineTile.localScale = new Vector3(machineTile.localScale.x,lerpy, 1);
-                if (machineTile.localScale.x <= 0.6)
+                if (machineTile.localScale.x <= 0.06f)
                 {
                     lerpIN = false;
                     lerp = 0;
@@ -483,9 +485,9 @@ public class Production : MonoBehaviour
             else
             {
                 t = Mathf.Sin(t * Mathf.PI * 0.5f);
-                float lerpy = Mathf.Lerp(0.8f, 1.0f, t);
+                float lerpy = Mathf.Lerp(0.06f, 0.08f, t);
                 machineTile.localScale = new Vector3(machineTile.localScale.x, lerpy, 1);
-                if (machineTile.localScale.x >= 1.0)
+                if (machineTile.localScale.x >= 0.08f)
                 {
                     lerpIN = true;
                     lerp = 0;
@@ -514,9 +516,9 @@ public class Production : MonoBehaviour
 
 
                 t = 1f - Mathf.Cos(t * Mathf.PI * 0.5f);
-                lerpX = Mathf.Lerp(1, 0.6f, t);
+                lerpX = Mathf.Lerp(0.08f, 0.04f, t);
                 machineTile.localScale = new Vector3(lerpX, machineTile.localScale.y, 1);
-                if (machineTile.localScale.x <= 0.6)
+                if (machineTile.localScale.x <= 0.04f)
                 {
                     lerpIN = false;
                     lerp = 0;
@@ -525,9 +527,9 @@ public class Production : MonoBehaviour
             else
             {
                 t = Mathf.Sin(t * Mathf.PI * 0.5f);
-                lerpX = Mathf.Lerp(0.6f, 1.0f, t);
+                lerpX = Mathf.Lerp(0.04f, 0.08f, t);
                 machineTile.localScale = new Vector3(lerpX, machineTile.localScale.y, 1);
-                if (machineTile.localScale.x >= 1.0)
+                if (machineTile.localScale.x >= 0.08f)
                 {
                     lerpIN = true;
                     lerp = 0;
@@ -541,7 +543,7 @@ public class Production : MonoBehaviour
     void ResetSize(GridTile machine)
     {
         Transform machineTile = machine.gameObject.transform.GetChild(0);
-        machineTile.localScale = Vector3.one;
+        machineTile.localScale = new Vector3(0.08f, 0.08f, 1);
     }
 
     void CheckTurn()

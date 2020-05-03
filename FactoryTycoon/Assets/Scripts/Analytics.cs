@@ -17,6 +17,8 @@ public class Analytics : MonoBehaviour
     float timer = 0;
      int ID = 0;
     string difficultyLevel;
+    string scenario;
+    float profit = 0;
     public bool statsSaved = false;
     bool CollectionAgreed = false;
 
@@ -27,8 +29,9 @@ public class Analytics : MonoBehaviour
     {
         gameManager = FindObjectOfType<GameManager>();
         CollectionAgreed = FindObjectOfType<UploadFile>().analticsAgreed;
-     
-            Debug.Log(getPath());
+#if UNITY_WEBGL
+#else
+        Debug.Log(getPath());
             if (!File.Exists(getPath()))
             {
                 FirstCSVSetup();
@@ -37,12 +40,12 @@ public class Analytics : MonoBehaviour
             {
                 GetLastRowUsed();
             }
-      
+#endif
     }
 
     void FirstCSVSetup()
     {
-        string[] headerRow = new string[11];
+        string[] headerRow = new string[12];
         headerRow[0] = "ID";
         headerRow[1] = "Time Spent";
         headerRow[2] = "Game Complete";
@@ -53,6 +56,8 @@ public class Analytics : MonoBehaviour
         headerRow[7] = "Environmental Stat";
         headerRow[8] = "Money";
         headerRow[9] = "More Info Button Clicked";
+        headerRow[10] = "Scenario";
+        headerRow[11] = "Profit";
         saveData.Add(headerRow);
 
         CreateDataFile();
@@ -98,13 +103,15 @@ public class Analytics : MonoBehaviour
 
     public void SaveStats()
     {
+#if UNITY_WEBGL
+#else
         if (CollectionAgreed)
         {
             saveData.Clear();
             GetStats();
 
 
-            string[] data = new string[11];
+            string[] data = new string[12];
             data[0] = ID.ToString();
             data[1] = timer.ToString();
             data[2] = gameComplete.ToString();
@@ -115,6 +122,8 @@ public class Analytics : MonoBehaviour
             data[7] = environmental.ToString();
             data[8] = money.ToString();
             data[9] = moreinfoClicked.ToString();
+            data[10] = scenario;
+            data[11] = profit.ToString();
             saveData.Add(data);
 
             string[][] output = new string[saveData.Count][];
@@ -144,6 +153,7 @@ public class Analytics : MonoBehaviour
             FindObjectOfType<UploadFile>().AttemptUpload();
             
         }
+#endif
         statsSaved = true;
     }
 
@@ -163,6 +173,8 @@ public class Analytics : MonoBehaviour
         Win = gameManager.win;
         moreinfoClicked = gameManager.moreInfoEngagement;
         difficultyLevel = gameManager.difficultyLevel;
+        scenario = gameManager.scenarioName;
+        profit = gameManager.profit;
 
     }
 

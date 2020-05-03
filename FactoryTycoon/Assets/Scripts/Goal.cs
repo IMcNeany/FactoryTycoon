@@ -8,7 +8,11 @@ public class Goal : MonoBehaviour
     float TargetEnvironmental;
     float Targetmoney;
     int totalTurns = -2;
+    public int gridWidth = 6;
+    public int gridHeight = 7;
+    public int storageRows = 3;
     Difficulty currentDifficulty;
+    Scenario currentScenario;
     public string goalText;
     public float waste = 60;
     public float startCash = 1000;
@@ -20,15 +24,15 @@ public class Goal : MonoBehaviour
         easy,
         medium,
         hard,
-        recession,
-        thrifty
+        tutorial
     }
 
     public enum Scenario
     {
         normal,
         thrifty,
-        recession
+        recession,
+        tutorial
     }
     // Start is called before the first frame update
     void start()
@@ -84,33 +88,18 @@ public class Goal : MonoBehaviour
                     {
                         gameManager.GameOver(GameManager.GameOverCode.FailTarSocial);
                     }
-                    else if(gameManager.GetTurn() == totalTurns)
+                    else if(gameManager.GetTurn() == totalTurns && gameManager.profit < Targetmoney)
+                    {
+                        gameManager.GameOver(GameManager.GameOverCode.NoTurn);
+                    }
+                    else if(gameManager.GetTurn() == totalTurns && gameManager.profit >= Targetmoney)
                     {
                         gameManager.Win(GameManager.GameOverCode.CompTurn);
                     }
                 }
                 break;
+      
             case 3:
-                {
-                    if (gameManager.social < TargetSocial &&  gameManager.environment < TargetEnvironmental)
-                    {
-                        gameManager.GameOver(GameManager.GameOverCode.FailSocEco);
-                    }
-                    else if(gameManager.social < TargetSocial)
-                    {
-                        gameManager.GameOver(GameManager.GameOverCode.FailTarSocial);
-                    }
-                    else if(gameManager.environment < TargetEnvironmental)
-                    {
-                        gameManager.GameOver(GameManager.GameOverCode.FailTarEco);
-                    }
-                    else if(gameManager.GetTurn() == totalTurns)
-                    {
-                        gameManager.Win(GameManager.GameOverCode.CompTurn);
-                    }
-                }
-                break;
-            case 4:
                 {
                     
                     if(gameManager.profit >= Targetmoney)
@@ -158,24 +147,18 @@ public class Goal : MonoBehaviour
                 break;
             case 2:
                 {
-                    goalText = "Keep the social pillar above -3 for 10 turns";
+                    goalText = "Keep the social pillar above -3 for 10 turns and break-even";
                     totalTurns = 10;
+                    Targetmoney = 0;
                     TargetSocial = -3;
                 }
                 break;
+        
             case 3:
-                {
-                    goalText = "Keep the environmental and social pillars above 0 for 10 turns";
-                    totalTurns = 10;
-                    TargetEnvironmental = 0;
-                    TargetSocial = 0;
-                }
-                break;
-            case 4:
                 {
                     tutorial = true;
                     goalText = "Make £400k Profit";
-                 
+                    currentDifficulty = Difficulty.tutorial;
                     Targetmoney = 400;
                     break;
                 }
@@ -193,6 +176,10 @@ public class Goal : MonoBehaviour
                     waste = 60;
                     startCash = 1500;
                     baseSell = 200;
+                    gridHeight = 7;
+                    storageRows = 3;
+                    gridWidth = 6;
+                    currentScenario = Scenario.normal;
                 }
                 break;
             case 1:
@@ -200,16 +187,24 @@ public class Goal : MonoBehaviour
                     waste = 50;
                     startCash = 1100;
                     baseSell = 120;
+                    gridHeight = 6;
+                    storageRows = 3;
+                    gridWidth = 6;
+                    currentScenario = Scenario.recession;
                 }
                 break;
             case 2:
                 {
-                    waste = 40;
+                    waste = 70;
                     startCash = 1000;
                     baseSell = 100;
+                    gridHeight = 6;
+                    storageRows = 2;
+                    gridWidth = 6;
+                    currentScenario = Scenario.thrifty;
                 }
                 break;
-            case 3:
+            case 4:
                 {
 
                     waste = 60;
@@ -217,8 +212,11 @@ public class Goal : MonoBehaviour
                     baseSell = 150;
                     tutorial = true;
                     goalText = "Make £400k Profit";
-
+                    currentDifficulty = Difficulty.tutorial;
                     Targetmoney = 400;
+                    gridHeight = 7;
+                    gridWidth = 6;
+                    currentScenario = Scenario.tutorial;
                 }
                 break;
         }
@@ -238,6 +236,11 @@ public class Goal : MonoBehaviour
     public string GetDifficulty()
     {
         return currentDifficulty.ToString();
+    }
+
+    public string GetScenario()
+    {
+        return currentScenario.ToString();
     }
 
     public bool GetTutorial()

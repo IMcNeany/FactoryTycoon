@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     int turn = 0;
     public int moreInfoEngagement = 0;
     public string difficultyLevel = null;
+    public string scenarioName = null;
 
     public float sellPrice = 100;
   //  public GameObject question;
@@ -84,6 +85,7 @@ public class GameManager : MonoBehaviour
         CalculateTurn();
         tutorialActive = FindObjectOfType<Goal>().GetTutorial();
         difficultyLevel = FindObjectOfType<Goal>().GetDifficulty();
+        scenarioName = FindObjectOfType<Goal>().GetScenario();
         
         if (tutorialActive)
         {
@@ -259,9 +261,17 @@ public class GameManager : MonoBehaviour
         Analytics analytics = FindObjectOfType<Analytics>();
         analytics.SaveStats();
         winOrLose.SetText("You lost..");
+        string turns;
+        if(turn <=1)
+        {
+            turns = "turn.";
+        }
+        else
+        {
+            turns = "turns.";
+        }
 
-
-        StatsText.SetText("You made £" + profit + "K in " + turn + " turns's. You achieved a social rating of " + social + " and an environmental rating of " + environment + ".");
+        StatsText.SetText("You made £" + profit + "K in " + turn + " " + turns + "You achieved a social rating of " + social + " and an environmental rating of " + environment + ".");
       //  gameoverAudio.PlayOneShot(loser);
         gameoverAudio.clip = loser;
         gameOverScreen.SetActive(true);
@@ -272,10 +282,17 @@ public class GameManager : MonoBehaviour
         CheckReason(code);
         completedLevel = true;
         win = true;
-        Analytics analytics = FindObjectOfType<Analytics>();
-        analytics.SaveStats();
+        string turns;
+        if (turn <= 1)
+        {
+            turns = "turn.";
+        }
+        else
+        {
+            turns = "turns.";
+        }
         winOrLose.SetText("You Won!");
-        StatsText.SetText("You made £" + profit + "K in " + turn + " turns's. You achieved a social rating of " + social + " and an environmental rating of " + environment + ".");
+        StatsText.SetText("You made £" + profit + "K in " + turn +" " + turns + "You achieved a social rating of " + social + " and an environmental rating of " + environment + ".");
         // winScreen.SetActive(true);
         gameoverAudio.clip = winner;
         gameOverScreen.SetActive(true);
@@ -339,7 +356,9 @@ public class GameManager : MonoBehaviour
 
     public void LoadMainMenu()
     {
-
+        Analytics analytics = FindObjectOfType<Analytics>();
+        analytics.SaveStats();
         SceneManager.LoadScene(0);
         Destroy(FindObjectOfType<Goal>().gameObject);
-    }}
+    }
+}
