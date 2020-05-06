@@ -163,6 +163,10 @@ public class GameManager : MonoBehaviour
       
         environmentText.SetText(environment.ToString());
 
+        Backgroundcontroller background = FindObjectOfType<Backgroundcontroller>();
+        background.UpdateBackground();
+
+
     }
    public int GetTurn()
     {

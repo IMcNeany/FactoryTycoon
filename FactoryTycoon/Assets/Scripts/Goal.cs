@@ -115,17 +115,7 @@ public class Goal : MonoBehaviour
     public void SetGoal(int difficulty)
     {
         currentDifficulty = (Goal.Difficulty) difficulty;
-        /*
-         * •“Easy” : Hard to lose public approval + longer game lengths + lower volumes of waste to handle 
-
-•“Medium” : Environmental impacts build quicker  + lower efficiencies from renewable tech 
-
-•“Hard” : short game lengths + quickly lose approval if continue with non environmental methods 
-
-•“Recession” : High approval from low environmental impact but public won’t spend money 
-
-•“Thrifty” : Start with  lots of renewable raw materials but no production facilities 
-*/
+     
 
         switch((int) difficulty)
         {
